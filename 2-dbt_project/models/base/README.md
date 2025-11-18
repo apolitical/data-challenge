@@ -1,0 +1,2 @@
+-- TODO: create base/staging model(s) here
+-- This file is just a placeholder to show structure.

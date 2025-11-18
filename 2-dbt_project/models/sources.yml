@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    description: "Raw data tables loaded from CSV files into DuckDB"
+    tables:
+      - name: users
+        description: "User records (may contain duplicates and deleted users)"
+      - name: courses
+        description: "Course catalog"
+      - name: enrolments
+        description: "User course enrolments"
+      - name: events
+        description: "User interaction events (video, quiz, etc.)"
