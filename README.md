@@ -181,10 +181,9 @@ See `SETUP.md` for detailed Airflow setup instructions.
 
 ---
 
-## Helpful Resources
+## Other Helpful Resources
 
 - **SETUP.md** - Detailed setup instructions and all commands
-- **CLAUDE.md** - Architecture overview and development guide
 - **notebooks/example_data_exploration.ipynb** - Example queries to explore the data
 - [dbt Documentation](https://docs.getdbt.com/)
 - [Airflow TaskFlow API](https://airflow.apache.org/docs/apache-airflow/stable/tutorial/taskflow.html)
