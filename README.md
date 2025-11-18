@@ -39,10 +39,13 @@ uv run jupyter lab # or jupyter notebook
 ```bash
 # 1. Set up .env locally for Airflow Home
 cp default.env .env
-## Edit the variable "AIRFLOW_HOME" to current working directory with absolute path
+## Edit the variable "AIRFLOW_HOME" to Airflow's working directory with absolute path
 
 # 2. Start Airflow in standalone mode
 uv run --env-file .env airflow standalone
+## Starts a local Airflow cluster, 
+## Default user is "admin", password is in local file "standalone_admin_password.txt"
+## Webserver can be opened at http://127.0.0.1:8080/home
 ```
 
 ## Repository Structure
