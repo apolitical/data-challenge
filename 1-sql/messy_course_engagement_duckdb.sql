@@ -8,16 +8,15 @@ WITH users_cleaned AS (
         u.email AS EmailAddress,
         u.signupDate,
         u.state AS user_state,
-        u.signupDate,  -- duplicate column
-        COALESCE(u.isGovEmployee, FALSE) AS isGovEmployee,  -- inconsistent boolean casting
+        u.signupDate,
+        COALESCE(u.isGovEmployee, FALSE) AS isGovEmployee,
         ROW_NUMBER() OVER (PARTITION BY u.id ORDER BY u.updatedAt DESC) AS rn,
-        -- Correlated subquery (inefficient!)
         (SELECT COUNT(*) FROM raw.enrolments e WHERE e.user_id = u.id) AS user_enrolment_count
     FROM
         raw.users AS u
     WHERE
         (u.deleted IS NULL OR u.deleted = FALSE)
-        AND (u.deleted IS NULL OR u.deleted != TRUE)  -- redundant condition
+        AND (u.deleted IS NULL OR u.deleted != TRUE)
 
 ), deduped_users AS (
 
@@ -31,10 +30,10 @@ WITH users_cleaned AS (
         c.course_id,
         c.title,
         c.category_name,
-        CASE WHEN c.category_name = '' THEN NULL ELSE c.category_name END AS cat_clean,  -- pointless
+        CASE WHEN c.category_name = '' THEN NULL ELSE c.category_name END AS cat_clean,
         c.course_created_at,
         c.course_created_at AS created,
-        c.course_created_at,  -- duplicate column
+        c.course_created_at,
         c.level,
         c.level AS courseLevel,
         c.publisher,
@@ -43,7 +42,6 @@ WITH users_cleaned AS (
 
 ), enrols AS (
 
-    -- duplicate logic repeated later in events section
     SELECT
         e.enrolment_id,
         e.user_id AS uID,
@@ -71,15 +69,13 @@ WITH users_cleaned AS (
         END AS event_group,
         ev.session_id,
         ev.metadata,
-        SPLIT_PART(ev.metadata, ':', 2) AS meta_value  -- nonsense parsing
+        SPLIT_PART(ev.metadata, ':', 2) AS meta_value
     FROM raw.events ev
 
 ),
 
--- Unused CTE
-pointless_cte AS (
+events_cte AS (
 
-    -- Manually listing columns instead of using SELECT * EXCEPT
     SELECT
         id, user_id, course_id, event_type, event_timestamp,
         event_date, event_group, session_id, metadata
@@ -105,15 +101,12 @@ pointless_cte AS (
         ev.session_id,
         ev.meta_value,
 
-        -- Window function in detail query (inefficient!)
         MIN(e.enrolled_at) OVER (PARTITION BY u.userId) AS user_first_enrolment,
 
-        -- Another correlated subquery calculating same thing differently
         (SELECT MIN(e2.enrolled_at)
          FROM raw.enrolments e2
          WHERE e2.user_id = u.userId) AS user_first_enrolment_again,
 
-        -- redundant CASE logic
         CASE
             WHEN ev.event_type = 'video_start' THEN 1
             WHEN ev.event_type = 'video_complete' THEN 1
@@ -122,19 +115,16 @@ pointless_cte AS (
             ELSE 0
         END AS engagement_flag,
 
-        -- Same calculation but written differently (bad!)
         CASE
             WHEN ev.event_type IN ('video_start', 'video_complete', 'quiz_start', 'quiz_submit')
             THEN 1 ELSE 0
         END AS engagement_flag_duplicate,
 
-        -- weird metric duplication
         CASE
             WHEN ev.event_type IN ('quiz_submit') THEN 1 ELSE 0 END AS completed_quiz,
         CASE
             WHEN ev.event_type IN ('video_complete') THEN 1 ELSE 0 END AS completed_video,
 
-        -- Unnecessarily complex boolean logic
         CASE
             WHEN ev.event_type = 'quiz_submit' AND ev.event_type != 'video_complete' THEN TRUE
             ELSE FALSE
@@ -145,7 +135,7 @@ pointless_cte AS (
     LEFT JOIN events ev ON ev.user_id = u.userId AND ev.course_id = e.course_id
     WHERE
         (e.status IS NULL OR e.status != 'cancelled')
-        AND (e.status IS NULL OR e.status != 'cancelled')  -- duplicate WHERE condition
+        AND (e.status IS NULL OR e.status != 'cancelled')
 
 ), aggregated AS (
 
@@ -153,31 +143,28 @@ pointless_cte AS (
         course_id,
         title,
         COUNT(DISTINCT userId) AS learners,
-        -- Calculate active_learners twice in different ways (inefficient!)
+
         COUNT(DISTINCT CASE WHEN engagement_flag = 1 THEN userId END) AS active_learners,
         COUNT(DISTINCT CASE WHEN engagement_flag_duplicate = 1 THEN userId END) AS active_learners_again,
 
-        -- Multiple redundant aggregations
+
         SUM(completed_quiz) AS total_quizzes_completed,
         CAST(SUM(completed_quiz) AS INTEGER) AS total_quizzes_completed_cast,
         SUM(completed_video) AS total_videos_completed,
 
-        COUNT(*) AS total_events,   -- incorrect grain: row explosion from joins
+        COUNT(*) AS total_events,
         COUNT(DISTINCT session_id) AS session_count,
-        COUNT(DISTINCT session_id) AS session_count_duplicate,  -- duplicate calculation
+        COUNT(DISTINCT session_id) AS session_count_duplicate,
 
-        -- Time-based aggregations
         MIN(event_timestamp) AS first_activity,
         MAX(event_timestamp) AS last_activity,
 
-        -- Another correlated subquery in aggregation (very slow!)
         (SELECT COUNT(DISTINCT ev.user_id)
          FROM raw.events ev
          WHERE ev.course_id = combined.course_id
            AND ev.event_type IN ('video_start', 'video_complete', 'quiz_start', 'quiz_submit')
         ) AS active_learners_subquery,
 
-        -- String concatenation in aggregation (bad practice)
         STRING_AGG(DISTINCT CAST(userId AS VARCHAR), ',') AS learner_ids_concat
 
     FROM combined
@@ -188,7 +175,6 @@ pointless_cte AS (
 
 SELECT
     a.*,
-    -- Calculate the same thing again but differently
     ROUND(
         CAST(a.active_learners AS FLOAT) /
         NULLIF(a.learners, 0),
@@ -197,5 +183,5 @@ SELECT
 FROM aggregated a
 WHERE
     (a.course_id IS NOT NULL)
-    AND (a.course_id IS NOT NULL)  -- duplicate WHERE again
+    AND (a.course_id IS NOT NULL)
 ORDER BY learners DESC;
