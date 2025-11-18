@@ -1,4 +1,4 @@
-# Apolitical Data Lead Technical Test (dbt + Airflow)
+# Data Challenge
 
 ## Overview
 
@@ -16,7 +16,7 @@ We are most interested in how you think, how you structure things, and how you c
 
 ## Quick Start
 
-This project uses **DuckDB** (embedded database) and **uv** (Python package manager) - no Docker required!
+This project uses **DuckDB** (embedded database) and **uv** (Python package manager)
 
 ### Prerequisites
 
@@ -24,9 +24,9 @@ This project uses **DuckDB** (embedded database) and **uv** (Python package mana
 
 ### Setups
 
-#### For Task 1 to 3
+> See `SETUP.md` for detailed instructions, DBT commands, jupyter notebook access, and Airflow commands.
 
-See `SETUP.md` for detailed setup instructions, dbt commands, and Airflow setup.
+#### For Task 1 to 3
 
 ```bash
 # 1. Initialize DuckDB database and load CSV data
@@ -37,6 +37,15 @@ uv run jupyter lab # or jupyter notebook
 ```
 
 #### For Task 3
+
+```bash
+# 1. Set up .env locally for Airflow Home
+cp default.env .env
+## Edit the variable "AIRFLOW_HOME" to current working directory with absolute path
+
+# 2. Start Airflow in standalone mode
+uv run --env-file .env airflow standalone
+```
 
 ---
 
@@ -53,12 +62,12 @@ uv run jupyter lab # or jupyter notebook
   - `dbt_project.yml`
   - `profiles.yml` - dbt configuration for DuckDB
   - `models/`
-    - `staging/` - Create your staging models here
+    - `base/` - Create your base/staging models here
     - `intermediate/` - Create intermediate models here
     - `marts/` - Create final mart models here
     - `sources.yml` - Source table definitions
 - `3-airflow/dags/`
-  - `course_engagement_pipeline.py`  ← Airflow TaskFlow DAG to implement
+  - `pipeline.py`  ← Airflow TaskFlow DAG to implement
 - `notebooks/`
   - `example_data_exploration.ipynb` - Example queries to help you explore the data
 - `scripts/`
@@ -88,7 +97,7 @@ Your task is to refactor this into a small dbt project and implement Airflow orc
    - What tables are involved? (Hint: `raw.users`, `raw.courses`, `raw.enrolments`, `raw.events`)
    - What is the **intended grain** of the final result? (one row per course)
    - What metrics is it trying to compute?
-   - What are the errors in the query?
+   - What are the anti-patterns in the query?
 3. You can explore the data using the Jupyter notebook: `notebooks/example_data_exploration.ipynb`
 
 **Note:** You do **not** need to give a long explanation, but it should be clear enough to justify your refactor inton DBT models in Task 2. 
@@ -127,11 +136,11 @@ In `2-dbt_project/models/`:
 
 1. Add a `schema.yml` (or extend existing files) to define:
    - At least **one or two models** with:
-     - `unique` and `not_null` tests on suitable keys (e.g. `enrolment_id`, `user_id`)
-     - A `relationships` test where appropriate (e.g. enrolments → users)
+     - `unique` and `not_null` tests on suitable keys
+     - A `relationships` test where appropriate
 2. Add brief **descriptions** for:
    - The final mart model
-   - A few important columns (e.g. `learners`, `active_learners`)
+   - A few important columns
 
 We are not expecting exhaustive coverage, just enough to demonstrate your approach.
 
@@ -139,7 +148,7 @@ We are not expecting exhaustive coverage, just enough to demonstrate your approa
 
 ## Task 4 — Airflow Orchestration (TaskFlow API)
 
-Open `3-airflow/dags/course_engagement_pipeline.py`.
+Open `3-airflow/dags/pipeline.py`.
 
 1. **Implement dbt orchestration tasks:**
    - Update `run_base`, `run_intermediate`, and `run_marts` to call `dbt run` with appropriate `--select` flags
@@ -148,7 +157,7 @@ Open `3-airflow/dags/course_engagement_pipeline.py`.
    - Add any other tasks that you think necessary for good practice
 
 2. **Add data export task:**
-   - Implement `export_mart_report` to:
+   - Implement `report_data` to:
      - Query the `analytics.mart_course_engagement` table from DuckDB
      - Export results to `output/reports/course_engagement_{date}.csv`
      - Use Airflow's context variables for date templating (e.g., `context['ds']`)

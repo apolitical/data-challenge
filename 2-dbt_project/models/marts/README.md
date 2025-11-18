@@ -1,1 +1,1 @@
--- TODO: create final mart model(s) here, e.g. mart_course_engagement.sql
+-- TODO: create final mart model(s) here

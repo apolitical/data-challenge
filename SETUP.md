@@ -176,20 +176,20 @@ All Airflow commands require `AIRFLOW_HOME` to be set:
 export AIRFLOW_HOME=$(pwd)/3-airflow
 
 # Start Airflow (all-in-one: webserver + scheduler + db)
-uv run airflow standalone
+uv run --env-file .env airflow standalone
 
 # List DAGs
-uv run airflow dags list
+uv run --env-file .env airflow dags list
 
 # Test a specific task (without running full DAG)
-uv run airflow tasks test course_engagement_pipeline run_staging 2024-01-01
+uv run --env-file .env airflow tasks test course_engagement_pipeline run_staging 2024-01-01
 
 # Trigger a DAG run
-uv run airflow dags trigger course_engagement_pipeline
+uv run --env-file .env airflow dags trigger course_engagement_pipeline
 
 # View DAG structure
-uv run airflow dags show course_engagement_pipeline
+uv run --env-file .env airflow dags show course_engagement_pipeline
 
 # View DAG runs
-uv run airflow dags list-runs -d course_engagement_pipeline
+uv run --env-file .env airflow dags list-runs -d course_engagement_pipeline
 ```
