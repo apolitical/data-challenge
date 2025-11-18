@@ -12,8 +12,6 @@ This exercise is designed to be completed in **1.5–2 hours** and assesses your
 You do **not** need to get everything perfect or fully production-ready.
 We are most interested in how you think, how you structure things, and how you communicate trade-offs.
 
----
-
 ## Quick Start
 
 This project uses **DuckDB** (embedded database) and **uv** (Python package manager)
@@ -41,13 +39,14 @@ uv run jupyter lab # or jupyter notebook
 ```bash
 # 1. Set up .env locally for Airflow Home
 cp default.env .env
-## Edit the variable "AIRFLOW_HOME" to current working directory with absolute path
+## Edit the variable "AIRFLOW_HOME" to Airflow's working directory with absolute path
 
 # 2. Start Airflow in standalone mode
 uv run --env-file .env airflow standalone
+## Starts a local Airflow cluster, 
+## Default user is "admin", password is in local file "standalone_admin_password.txt"
+## Webserver can be opened at http://127.0.0.1:8080/home
 ```
-
----
 
 ## Repository Structure
 
@@ -88,8 +87,6 @@ This query:
 
 Your task is to refactor this into a small dbt project and implement Airflow orchestration.
 
----
-
 ## Task 1 — Understand the Legacy Query
 
 1. Open `1-sql/messy_course_engagement_duckdb.sql`.
@@ -101,8 +98,6 @@ Your task is to refactor this into a small dbt project and implement Airflow orc
 3. You can explore the data using the Jupyter notebook: `notebooks/example_data_exploration.ipynb`
 
 **Note:** You do **not** need to give a long explanation, but it should be clear enough to justify your refactor inton DBT models in Task 2. 
-
----
 
 ## Task 2 — Refactor into DBT Models
 
@@ -128,8 +123,6 @@ Using the DBT project skeleton in `2-dbt_project/`:
 **Notes:**
 - Use `ref()` and `source()` appropriately so that dependencies are clear.
 
----
-
 ## Task 3 — Add Basic Tests and Documentation
 
 In `2-dbt_project/models/`:
@@ -143,8 +136,6 @@ In `2-dbt_project/models/`:
    - A few important columns
 
 We are not expecting exhaustive coverage, just enough to demonstrate your approach.
-
----
 
 ## Task 4 — Airflow Orchestration (TaskFlow API)
 
@@ -187,7 +178,5 @@ See `SETUP.md` for detailed Airflow setup instructions.
 - **notebooks/example_data_exploration.ipynb** - Example queries to explore the data
 - [dbt Documentation](https://docs.getdbt.com/)
 - [Airflow TaskFlow API](https://airflow.apache.org/docs/apache-airflow/stable/tutorial/taskflow.html)
-
----
 
 Good luck, and thank you for taking the time to complete this exercise!

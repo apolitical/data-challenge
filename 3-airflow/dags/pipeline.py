@@ -63,7 +63,7 @@ def pipeline():
     report = report_data()
 
     # Set up the DAG flow
-    # staging -> intermediate -> marts -> quality_check -> export
-    staging >> intermediate >> marts >> quality_check >> report
+    # staging -> intermediate -> marts -> report
+    staging >> intermediate >> marts >> report
 
 pipeline()
