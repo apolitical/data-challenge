@@ -1,0 +1,12 @@
+# dbt profile for DuckDB connection
+# This file should be placed in ~/.dbt/profiles.yml or referenced with --profiles-dir
+
+default:
+  outputs:
+    dev:
+      type: duckdb
+      path: ../mock_data.duckdb
+      schema: analytics
+      threads: 4
+
+  target: dev

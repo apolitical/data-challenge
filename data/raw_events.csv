@@ -1,0 +1,7 @@
+id,user_id,course_id,event_type,event_timestamp,session_id,metadata
+9001,1,101,video_start,2023-03-01 09:05:00,abc1,video:1
+9002,1,101,video_complete,2023-03-01 09:20:00,abc1,video:1
+9003,1,102,quiz_start,2023-03-06 10:30:00,xyz9,quiz:attempt
+9004,1,102,quiz_submit,2023-03-06 10:35:00,xyz9,quiz:pass
+9005,2,101,video_start,2023-03-02 11:05:00,def3,video:1
+9006,3,103,other,2023-03-07 12:30:00,ghi8,none

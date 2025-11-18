@@ -1,0 +1,39 @@
+CLAUDE.md
+.venv/
+.zed/
+.env
+
+# DuckDB database file
+*.duckdb
+*.duckdb.wal
+
+# Output files
+output/
+
+# Airflow
+airflow_home/
+logs/
+airflow.db
+airflow.cfg
+webserver_config.py
+standalone_*
+airflow-webserver*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter
+.ipynb_checkpoints/
+
+# uv
+uv.lock
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
