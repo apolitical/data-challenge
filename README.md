@@ -34,7 +34,7 @@ uv run python scripts/init_db.py
 uv run jupyter lab # or jupyter notebook
 ```
 
-#### For Task 3
+#### For Task 4
 
 ```bash
 # 1. Set up .env locally for Airflow Home
