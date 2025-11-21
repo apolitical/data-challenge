@@ -117,8 +117,7 @@ This will:
 
 The admin credentials will be displayed in the terminal output. Look for:
 ```
-standalone | Admin user login: admin
-standalone | Admin password: <random-password>
+standalone | Login with username: admin  password: <random-password>
 ```
 
 Then:
