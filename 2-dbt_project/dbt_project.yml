@@ -1,4 +1,4 @@
-name: 'apolitical-data-lead'
+name: 'apolitical_data_lead'
 version: '1.0.0'
 config-version: 2
 
@@ -8,7 +8,7 @@ model-paths: ['models']
 # Seeds not needed - data loaded directly into DuckDB
 
 models:
-  apolitical-data-lead:
+  apolitical_data_lead:
     staging:
       +materialized: view
     intermediate:
