@@ -1,8 +1,13 @@
 CLAUDE.md
-notes.md
 .venv/
 .zed/
 .env
+
+1-sql/*.sql
+!1-sql/messy_course_engagement_duckdb.sql
+2-dbt_project/models/*/*.sql
+3-airflow/dags/*
+!3-airflow/dags/pipeline.py
 
 # DuckDB database file
 *.duckdb
