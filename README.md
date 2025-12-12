@@ -93,8 +93,8 @@ Your task is to refactor this into a small dbt project and implement Airflow orc
 
 1. Open `1-sql/messy_course_engagement_duckdb.sql`.
 2. Understand:
-   - What tables are involved? (Hint: `raw.users`, `raw.courses`, `raw.enrolments`, `raw.events`)
-   - What is the **intended grain** of the final result? (one row per course)
+   - What tables are involved?
+   - What is the **intended grain** of the final result?
    - What metrics is it trying to compute?
    - What are the anti-patterns in the query?
 3. You can explore the data using the Jupyter notebook: `notebooks/example_data_exploration.ipynb`
