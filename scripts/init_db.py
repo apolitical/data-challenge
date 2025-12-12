@@ -29,7 +29,7 @@ def get_connection():
         conn = duckdb.connect(str(DB_FILE))
         return conn
     except Exception as e:
-        print(f"❌ Error: Could not create/connect to DuckDB database")
+        print("❌ Error: Could not create/connect to DuckDB database")
         print(f"   Details: {e}")
         sys.exit(1)
 
