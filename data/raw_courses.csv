@@ -1,4 +1,61 @@
 course_id,title,category_name,level,publisher,course_created_at
-101,Leadership Basics,Management,Beginner,Apolitical,2023-01-01
-102,Advanced Policy,Policy,Advanced,Oxford,2023-02-10
-103,Wellbeing at Work,Health,Intermediate,Apolitical,2023-03-01
+101,Essentials of Procurement 101,Climate,Advanced,LSE,2023-04-04
+102,Practical Policy 101,Leadership,Advanced,OECD,2023-06-19
+103,Intro to Climate in Government,Procurement,Intermediate,GovLab,2023-03-25
+104,Practical Climate in Government,Procurement,Beginner,LSE,2023-04-18
+105,Mastering Finance 101,Climate,Beginner,UNDP,2023-04-14
+106,Essentials of Management in Government,Digital,Beginner,GovLab,2023-07-21
+107,Essentials of HR 101,Leadership,Intermediate,CityU,2023-04-24
+108,Mastering Data Toolkit,Operations,Advanced,Cambridge,2023-06-18
+109,Intro to Digital Toolkit,Security,Advanced,OECD,2023-01-24
+110,Advanced Security in Government,Data,Beginner,Cambridge,2023-01-07
+111,Intro to Data for Leaders,HR,Beginner,CityU,2023-04-17
+112,Mastering HR Strategies,Climate,Advanced,GovLab,2023-05-07
+113,Practical Data Strategies,Security,Advanced,Apolitical,2023-08-17
+114,Intro to Finance Strategies,Health,Advanced,CityU,2023-01-13
+115,Essentials of Data Basics,Operations,Beginner,CityU,2023-06-20
+116,Essentials of Procurement Toolkit,Leadership,Intermediate,GovLab,2023-08-01
+117,Essentials of Operations Strategies,Climate,Intermediate,CityU,2023-03-08
+118,Advanced Security in Government,Procurement,Intermediate,LSE,2023-03-12
+119,Practical Policy 101,Digital,Beginner,UNDP,2023-03-27
+120,Foundations of Procurement Basics,Health,Beginner,LSE,2023-04-09
+121,Mastering Health 101,Data,Beginner,GovLab,2023-04-15
+122,Foundations of Procurement for Leaders,Finance,Beginner,LSE,2023-08-02
+123,Practical Finance Toolkit,Climate,Beginner,GovLab,2023-05-03
+124,Intro to Leadership in Government,Finance,Intermediate,LSE,2023-05-05
+125,Advanced Digital for Leaders,Operations,Beginner,GovLab,2023-03-28
+126,Mastering Security for Leaders,Climate,Beginner,CityU,2023-08-24
+127,Advanced HR Toolkit,Management,Intermediate,Apolitical,2023-01-22
+128,Mastering Finance Strategies,Operations,Beginner,Apolitical,2023-03-08
+129,Practical Leadership Strategies,Operations,Intermediate,OECD,2023-07-14
+130,Practical Digital for Leaders,Digital,Beginner,CityU,2023-01-05
+131,Mastering Procurement Basics,Leadership,Beginner,Oxford,2023-07-19
+132,Mastering Management Basics,Data,Beginner,Apolitical,2023-06-09
+133,Advanced Data Strategies,Operations,Advanced,Oxford,2023-05-25
+134,Advanced Operations 101,Digital,Intermediate,Cambridge,2023-06-05
+135,Essentials of Climate 101,Policy,Beginner,UNDP,2023-01-28
+136,Essentials of Management in Government,HR,Advanced,GovLab,2023-04-12
+137,Mastering Data Basics,HR,Advanced,LSE,2023-01-27
+138,Mastering Digital 101,HR,Beginner,Apolitical,2023-03-30
+139,Essentials of Finance 101,Leadership,Beginner,OECD,2023-01-04
+140,Practical Operations Basics,Finance,Intermediate,CityU,2023-07-01
+141,Advanced Finance Strategies,Climate,Advanced,UNDP,2023-06-07
+142,Essentials of Operations for Leaders,Finance,Advanced,UNDP,2023-03-24
+143,Advanced Policy in Government,Operations,Beginner,CityU,2023-05-26
+144,Essentials of Security for Leaders,Leadership,Beginner,CityU,2023-08-06
+145,Foundations of Health for Leaders,Data,Intermediate,UNDP,2023-03-29
+146,Foundations of HR 101,Digital,Advanced,Apolitical,2023-05-13
+147,Advanced Policy Strategies,Climate,Intermediate,CityU,2023-05-23
+148,Advanced Climate for Leaders,Security,Advanced,CityU,2023-04-25
+149,Intro to Policy in Government,Data,Intermediate,LSE,2023-03-20
+150,Mastering HR in Government,Operations,Advanced,OECD,2023-04-19
+151,Mastering Procurement in Government,Leadership,Advanced,CityU,2023-03-11
+152,Foundations of Digital Strategies,Policy,Advanced,LSE,2023-03-22
+153,Intro to Climate Toolkit,Climate,Beginner,LSE,2023-02-25
+154,Mastering Operations in Government,Climate,Advanced,UNDP,2023-01-26
+155,Advanced Digital Strategies,Leadership,Beginner,UNDP,2023-01-04
+156,Mastering Procurement Strategies,Digital,Beginner,Apolitical,2023-05-22
+157,Foundations of Climate Strategies,Security,Intermediate,Oxford,2023-08-12
+158,Intro to HR in Government,Operations,Intermediate,CityU,2023-03-29
+159,Advanced Management in Government,Operations,Beginner,Oxford,2023-04-13
+160,Practical Policy Toolkit,Security,Advanced,Apolitical,2023-02-08
