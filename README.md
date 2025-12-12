@@ -24,6 +24,8 @@ This project uses **DuckDB** (embedded database) and **uv** (Python package mana
 
 > See `SETUP.md` for detailed instructions, DBT commands, jupyter notebook access, and Airflow commands.
 
+Run `uv sync` to prepare local repository.
+
 #### For Task 1 to 3
 
 ```bash
