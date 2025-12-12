@@ -7,6 +7,7 @@ CLAUDE.md
 !1-sql/messy_course_engagement_duckdb.sql
 
 2-dbt_project/models/*/*.sql
+2-dbt_project/models/*/*/*.sql
 2-dbt_project/target
 2-dbt_project/.user.yml
 
