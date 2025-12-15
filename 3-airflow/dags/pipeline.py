@@ -1,17 +1,19 @@
+# 3-airflow/dags/pipeline.py
 from airflow.decorators import dag, task
+from airflow.exceptions import AirflowFailException
 from datetime import datetime
 
 DEFAULT_ARGS = {
     "owner": "data_platform",
+    "max_active_runs_per_dag": 1,
     "retries": 1,
 }
 
 @dag(
     schedule="@daily",
-    start_date=datetime(2025, 12, 1),
+    start_date=datetime(2025, 12, 14),
     catchup=False,
     default_args=DEFAULT_ARGS,
-    tags=["apolitical"],
 )
 def apolitical_data_challenge():
     """Orchestrates dbt models for course engagement analytics.
@@ -30,18 +32,21 @@ def apolitical_data_challenge():
     def run_staging():
         """Run dbt staging models to clean and deduplicate raw data."""
         # TODO: replace with your preferred way of invoking dbt, e.g.:
-        # subprocess.run(["dbt", "run", "--select", "path:models/staging"], check=True)
+        # subprocess.run(
+        #     ["dbt", "run", "--select", "path:models/staging"],
+        #     check=True
+        # )
         pass
 
     @task
     def run_intermediate():
         """Run dbt intermediate models to join and transform data."""
-        pass
+        raise AirflowFailException("Nope, Task not yet configured")
 
     @task
     def run_marts():
         """Run dbt marts models to create final analytics tables."""
-        pass
+        raise AirflowFailException("Nope, Task not yet configured")
 
     @task
     def report_data(**context):
@@ -53,7 +58,7 @@ def apolitical_data_challenge():
         - Export to output/course_engagement_20251201.csv (date should be the DAG run date)
         - Create output directory if it doesn't exist
         """
-        pass
+        raise AirflowFailException("Nope, Task not yet configured")
 
     # Define task dependencies
     staging = run_staging()
