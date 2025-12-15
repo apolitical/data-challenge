@@ -13,11 +13,11 @@ DEFAULT_ARGS = {
     default_args=DEFAULT_ARGS,
     tags=["apolitical"],
 )
-def pipeline():
+def apolitical_data_challenge():
     """Orchestrates dbt models for course engagement analytics.
 
     TODO for candidate:
-    - Deside on the DAG structure and Tasks
+    - Decide on the DAG structure and Tasks
       - Current tasks are just placeholders, add or remove based on your design
       - Should use a sensible structure
       - Tasks should refresh the Data Models AND output a report CSV file
@@ -65,4 +65,4 @@ def pipeline():
     # staging -> intermediate -> marts -> report
     staging >> intermediate >> marts >> report
 
-pipeline()
+apolitical_data_challenge()
