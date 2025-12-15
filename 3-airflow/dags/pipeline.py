@@ -1,6 +1,5 @@
 from airflow.decorators import dag, task
 from datetime import datetime
-import os
 
 DEFAULT_ARGS = {
     "owner": "data_platform",
@@ -51,7 +50,7 @@ def pipeline():
         TODO: Implement CSV export with:
         - Connect to DuckDB at ../mock_data.duckdb
         - Query analytics.mart_course_engagement table
-        - Export to output/course_engagement_20251201.csv (date shouild be the DAG run date)
+        - Export to output/course_engagement_20251201.csv (date should be the DAG run date)
         - Create output directory if it doesn't exist
         """
         pass
