@@ -179,7 +179,7 @@ SELECT
         CAST(a.active_learners AS FLOAT) /
         NULLIF(a.learners, 0),
         4
-    ) AS engagement_rate_duplicate
+    ) AS engagement_rate
 FROM aggregated a
 WHERE
     (a.course_id IS NOT NULL)
