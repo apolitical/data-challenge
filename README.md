@@ -5,7 +5,7 @@
 This exercise is designed to be completed in **1.5–2 hours** and assesses your ability to:
 
 - Understand and refactor a complex SQL query
-- Structure transformations into sensible dbt layers (staging / intermediate / marts)
+- Structure transformations into sensible dbt layers (base / intermediate / marts)
 - Add basic data quality tests and documentation
 - Implement an Airflow DAG using the TaskFlow API to orchestrate dbt runs and data exports
 
@@ -99,7 +99,7 @@ Your task is to refactor this into a small dbt project and implement Airflow orc
    - What are the anti-patterns in the query?
 3. You can explore the data using the Jupyter notebook: `notebooks/example_data_exploration.ipynb`
 
-**Note:** You do **not** need to give a long explanation, but it should be clear enough to justify your refactor inton DBT models in Task 2. 
+**Note:** You do **not** need to give a long explanation, but it should be clear enough to justify your refactor into DBT models in Task 2. 
 
 ## Task 2 — Refactor into DBT Models
 
@@ -113,7 +113,7 @@ Using the DBT project skeleton in `2-dbt_project/`:
    - `intermediate_events__events.sql`
    - ...
 3. Create **a final mart** in `models/marts/`, for example:
-   - `marts_courses__engagements.sql`
+   - `marts_courses__engagement.sql`
      - The final mart should be at **one row per course** with metrics such as:
        - `learners` - Distinct users enrolled
        - `active_learners` - Distinct users with events
@@ -151,7 +151,7 @@ Open `3-airflow/dags/pipeline.py`.
 
 2. **Add data export task:**
    - Implement `report_data` to:
-     - Query the `analytics.mart_course_engagement` table from DuckDB
+     - Query the `analytics.marts_courses__engagement` table from DuckDB
      - Export results to `output/reports/course_engagement_{date}.csv`
      - Use Airflow's context variables for date templating (e.g., `context['ds']`)
    - This simulates delivering results to stakeholders
