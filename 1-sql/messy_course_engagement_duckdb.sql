@@ -184,4 +184,4 @@ FROM aggregated a
 WHERE
     (a.course_id IS NOT NULL)
     AND (a.course_id IS NOT NULL)
-ORDER BY learners DESC;
+ORDER BY learners DESC
