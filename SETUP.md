@@ -58,6 +58,8 @@ The example notebook is `notebooks/example_data_exploration.ipynb`. It shows:
 - example engagement queries
 - a few data quality checks
 
+The notebook connects to DuckDB in read-only mode, so it should not block dbt commands.
+
 ## Optional: dbt
 
 Run dbt commands from `2-dbt_project/`:
@@ -102,7 +104,8 @@ uv run dbt docs serve
 
 Note: the repository uses `models/base/` as the first dbt layer.
 If you prefer to run dbt from the repository root, set `DBT_PROFILES_DIR=$(pwd)/2-dbt_project` instead.
-If you see a DuckDB lock error, close any open Jupyter notebook kernels or other processes connected to `mock_data.duckdb`, then rerun the dbt command.
+You should not normally see a DuckDB lock error from the example notebook.
+If you do see one, it usually means another local process has opened `mock_data.duckdb` in write mode. Close that process, then rerun the dbt command.
 
 To identify the process holding the lock:
 
@@ -185,7 +188,7 @@ uv run --env-file .env airflow dags trigger apolitical_data_challenge
 uv run --env-file .env airflow dags list-runs -d apolitical_data_challenge
 
 # Test a specific task without running the full DAG
-uv run --env-file .env airflow tasks test apolitical_data_challenge run_staging 2024-01-01
+uv run --env-file .env airflow tasks test apolitical_data_challenge run_base 2024-01-01
 ```
 
 If you rename DAG or task ids while completing the exercise, update the example commands accordingly.
