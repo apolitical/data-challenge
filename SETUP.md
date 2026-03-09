@@ -136,11 +136,13 @@ cp default.env .env
 ```
 
 2. Edit `.env` and set `AIRFLOW_HOME` to the absolute path of this repository's `3-airflow` directory.
+Also set `PYTHONPATH` to the absolute path of the `3-airflow` directory.
 
 Example:
 
 ```bash
 AIRFLOW_HOME=/absolute/path/to/data-challenge/3-airflow
+PYTHONPATH=/absolute/path/to/data-challenge/3-airflow
 ```
 
 3. Start Airflow:
@@ -148,6 +150,14 @@ AIRFLOW_HOME=/absolute/path/to/data-challenge/3-airflow
 ```bash
 uv run --env-file .env airflow standalone
 ```
+
+On macOS, the repository includes a small Airflow workaround:
+
+- `3-airflow/sitecustomize.py`: auto-loaded by Python at startup
+- `3-airflow/airflow_macos_standalone_workaround.py`: the actual macOS-specific patch
+
+This avoids a known Airflow standalone crash in forked log-server processes.
+For that auto-load to work, `PYTHONPATH` must include `3-airflow/`.
 
 This will:
 
