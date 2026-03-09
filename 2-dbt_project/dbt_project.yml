@@ -1,14 +1,14 @@
-name: 'apolitical_data_lead'
+name: 'course_engagement'
 version: '1.0.0'
 config-version: 2
 
-profile: 'default'
+profile: 'course_engagement'
 
 model-paths: ['models']
 # Seeds not needed - data loaded directly into DuckDB
 
 models:
-  apolitical_data_lead:
+  course_engagement:
     base:
       +materialized: view
     intermediate:
