@@ -104,6 +104,24 @@ Note: the repository uses `models/base/` as the first dbt layer.
 If you prefer to run dbt from the repository root, set `DBT_PROFILES_DIR=$(pwd)/2-dbt_project` instead.
 If you see a DuckDB lock error, close any open Jupyter notebook kernels or other processes connected to `mock_data.duckdb`, then rerun the dbt command.
 
+To identify the process holding the lock:
+
+```bash
+lsof mock_data.duckdb
+```
+
+To stop that process:
+
+```bash
+kill <PID>
+```
+
+If it does not stop cleanly:
+
+```bash
+kill -9 <PID>
+```
+
 ## Optional: Airflow
 
 If you want to run the DAG locally:
