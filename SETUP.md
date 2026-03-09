@@ -1,194 +1,170 @@
-# Setup Instructions
+# Setup
 
-This guide shows how to set up the development environment using **uv** only.
+This project uses `uv` and DuckDB only. You do not need Docker, PostgreSQL, or any other services.
 
-## Prerequisites
+## Prerequisite
 
-- [uv](https://github.com/astral-sh/uv) - Install with: `curl -LsSf https://astral.sh/uv/install.sh | sh`
-
-That's it! No Docker, PostgreSQL, or other dependencies needed.
-
-## Quick Start (2 commands!)
-
-### 1. Initialize Database
+Install `uv`:
 
 ```bash
-# Create DuckDB database and load CSV data
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+## Quick Start
+
+From the repository root:
+
+```bash
+uv sync
 uv run python scripts/init_db.py
 ```
 
-This single command will:
-- Automatically install all Python dependencies (first run only)
-- Create a `mock_data.duckdb` file in the project root
-- Create `raw` schema and tables
-- Load CSV files from `data/` into DuckDB
-- Create indexes for better query performance
-- Verify data was loaded correctly
+This will:
 
-Expected output:
-```
-============================================================
-🚀 Initializing Course Engagement Database (DuckDB)
-============================================================
+- install Python dependencies
+- create `mock_data.duckdb` in the project root
+- create the `raw` schema and tables
+- load the CSV files from `data/`
+- create indexes
+- verify the row counts
 
-✅ Connected to DuckDB at /path/to/mock_data.duckdb
+You should see row counts for:
 
-📋 Creating schema and tables...
-✅ Schema and tables created
-📥 Loading CSV data...
-   ✓ Loaded 6 rows into raw.users
-   ✓ Loaded 3 rows into raw.courses
-   ✓ Loaded 4 rows into raw.enrolments
-   ✓ Loaded 6 rows into raw.events
-✅ All data loaded
-🔍 Creating indexes...
-✅ Indexes created
+- `raw.users`
+- `raw.courses`
+- `raw.enrolments`
+- `raw.events`
 
-📊 Verifying data...
+## Optional: Jupyter
 
-Row counts:
-   raw.users: 6 rows
-   raw.courses: 3 rows
-   raw.enrolments: 4 rows
-   raw.events: 6 rows
-
-============================================================
-✨ Database initialization complete!
-============================================================
-```
-
-### 2. Start Jupyter Notebook
+If you want to explore the data interactively:
 
 ```bash
-# Start JupyterLab
 uv run jupyter lab
+```
 
-# Or if you prefer the classic notebook interface
+Or:
+
+```bash
 uv run jupyter notebook
 ```
 
-This will start Jupyter on `http://localhost:8888`
+Jupyter usually starts on `http://localhost:8888`.
 
-### 3. Open the Example Notebook
+The example notebook is `notebooks/example_data_exploration.ipynb`. It shows:
 
-Navigate to `notebooks/example_data_exploration.ipynb` to see examples of:
-- Connecting to DuckDB
-- Querying raw data tables
-- Exploring course engagement metrics
-- Running data quality checks
+- how to connect to DuckDB
+- how to inspect the raw tables
+- example engagement queries
+- a few data quality checks
 
-### 4. (Optional) Run dbt Models
+## Optional: dbt
 
-If you want to work with dbt:
+Run dbt commands from `2-dbt_project/`:
 
 ```bash
 cd 2-dbt_project
+```
 
-# Test the connection
+Useful commands:
+
+```bash
+# Check the DuckDB connection
 uv run dbt debug --profiles-dir .
 
-# Run all models
+# Compile without running
+uv run dbt compile --profiles-dir .
+
+# Run everything
 uv run dbt run --profiles-dir .
 
-# Run models by folder
-uv run dbt run --select path:models/staging --profiles-dir .
+# Run by layer
+uv run dbt run --select path:models/base --profiles-dir .
 uv run dbt run --select path:models/intermediate --profiles-dir .
 uv run dbt run --select path:models/marts --profiles-dir .
 
-# Run tests
-uv run dbt test --profiles-dir .
-```
-
-### 5. (Optional) Run Airflow
-
-If you want to test the Airflow DAG:
-
-```bash
-# Set Airflow home and start (one command!)
-export AIRFLOW_HOME=$(pwd)/3-airflow
-uv run airflow standalone
-```
-
-This will:
-- Initialize the database
-- Create an admin user with random password
-- Start the webserver on port 8080
-- Start the scheduler
-
-The admin credentials will be displayed in the terminal output. Look for:
-```
-standalone | Login with username: admin  password: <random-password>
-```
-
-Then:
-1. Open `http://localhost:8080` in your browser
-2. Login with the credentials shown in terminal
-3. Enable the `course_engagement_pipeline` DAG in the UI
-4. Trigger a manual run to test
-
-**Stopping Airflow:**
-```bash
-# Press Ctrl+C in the terminal
-```
-
-## Useful Commands
-
-### dbt Commands
-
-All dbt commands should be run from the `2-dbt_project/` directory:
-
-```bash
-cd 2-dbt_project
-
-# Debug connection to DuckDB
-uv run dbt debug --profiles-dir .
-
-# Compile models (don't run)
-uv run dbt compile --profiles-dir .
-
-# Run all models
-uv run dbt run --profiles-dir .
-
-# Run specific models
+# Run a specific model
 uv run dbt run --select base_users__users --profiles-dir .
-uv run dbt run --select tag:daily --profiles-dir .
 
 # Run tests
 uv run dbt test --profiles-dir .
 uv run dbt test --select source:raw --profiles-dir .
 
-# Generate documentation
-uv run dbt docs generate --profiles-dir .
-uv run dbt docs serve --profiles-dir .
-
-# View lineage
+# Inspect the graph
 uv run dbt ls --profiles-dir .
 uv run dbt ls --select source:* --profiles-dir .
+
+# Generate docs
+uv run dbt docs generate --profiles-dir .
+uv run dbt docs serve --profiles-dir .
 ```
 
-### Airflow Commands
+Note: the repository uses `models/base/` as the first dbt layer.
 
-All Airflow commands require `AIRFLOW_HOME` to be set:
+## Optional: Airflow
+
+If you want to run the DAG locally:
+
+1. Create a local env file:
 
 ```bash
-# Set Airflow home
-export AIRFLOW_HOME=$(pwd)/3-airflow
+cp default.env .env
+```
 
-# Start Airflow (all-in-one: webserver + scheduler + db)
+2. Edit `.env` and set `AIRFLOW_HOME` to the absolute path of this repository's `3-airflow` directory.
+
+Example:
+
+```bash
+AIRFLOW_HOME=/absolute/path/to/data-challenge/3-airflow
+```
+
+3. Start Airflow:
+
+```bash
+uv run --env-file .env airflow standalone
+```
+
+This will:
+
+- initialize the Airflow metadata database
+- create an admin user
+- start the webserver on port `8080`
+- start the scheduler
+
+The login username is `admin`. Airflow writes the password to `standalone_admin_password.txt` and also prints it in the terminal output.
+
+Then:
+
+1. Open `http://localhost:8080`
+2. Sign in with the admin credentials
+3. Enable the DAG
+4. Trigger a run
+
+Stop Airflow with `Ctrl+C`.
+
+## Airflow Command Reference
+
+These commands assume you have already created `.env` and set `AIRFLOW_HOME` correctly.
+
+```bash
+# Start Airflow
 uv run --env-file .env airflow standalone
 
 # List DAGs
 uv run --env-file .env airflow dags list
 
-# Test a specific task (without running full DAG)
-uv run --env-file .env airflow tasks test course_engagement_pipeline run_staging 2024-01-01
+# Show the DAG structure
+uv run --env-file .env airflow dags show apolitical_data_challenge
 
 # Trigger a DAG run
-uv run --env-file .env airflow dags trigger course_engagement_pipeline
-
-# View DAG structure
-uv run --env-file .env airflow dags show course_engagement_pipeline
+uv run --env-file .env airflow dags trigger apolitical_data_challenge
 
 # View DAG runs
-uv run --env-file .env airflow dags list-runs -d course_engagement_pipeline
+uv run --env-file .env airflow dags list-runs -d apolitical_data_challenge
+
+# Test a specific task without running the full DAG
+uv run --env-file .env airflow tasks test apolitical_data_challenge run_staging 2024-01-01
 ```
+
+If you rename DAG or task ids while completing the exercise, update the example commands accordingly.
