@@ -29,11 +29,11 @@ def apolitical_data_challenge():
     """
 
     @task
-    def run_staging():
-        """Run dbt staging models to clean and deduplicate raw data."""
+    def run_base():
+        """Run dbt base models to clean and deduplicate raw data."""
         # TODO: replace with your preferred way of invoking dbt, e.g.:
         # subprocess.run(
-        #     ["dbt", "run", "--select", "path:models/staging"],
+        #     ["dbt", "run", "--select", "path:models/base"],
         #     check=True
         # )
         pass
@@ -50,24 +50,24 @@ def apolitical_data_challenge():
 
     @task
     def report_data(**context):
-        """Export mart_course_engagement table to CSV for stakeholders.
+        """Export marts_courses__engagement table to CSV for stakeholders.
 
         TODO: Implement CSV export with:
         - Connect to DuckDB at ../mock_data.duckdb
-        - Query analytics.mart_course_engagement table
-        - Export to output/course_engagement_20251201.csv (date should be the DAG run date)
+        - Query analytics.marts_courses__engagement table
+        - Export to output/reports/course_engagement_20251201.csv (date should be the DAG run date)
         - Create output directory if it doesn't exist
         """
         raise AirflowFailException("Nope, Task not yet configured")
 
     # Define task dependencies
-    staging = run_staging()
+    base = run_base()
     intermediate = run_intermediate()
     marts = run_marts()
     report = report_data()
 
     # Set up the DAG flow
-    # staging -> intermediate -> marts -> report
-    staging >> intermediate >> marts >> report
+    # base -> intermediate -> marts -> report
+    base >> intermediate >> marts >> report
 
 apolitical_data_challenge()
