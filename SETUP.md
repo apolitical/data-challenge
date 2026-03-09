@@ -100,6 +100,7 @@ uv run dbt docs serve --profiles-dir .
 ```
 
 Note: the repository uses `models/base/` as the first dbt layer.
+If you see a DuckDB lock error, close any open Jupyter notebook kernels or other processes connected to `mock_data.duckdb`, then rerun the dbt command.
 
 ## Optional: Airflow
 
