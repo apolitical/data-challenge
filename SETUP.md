@@ -167,6 +167,19 @@ Then:
 
 Stop Airflow with `Ctrl+C`.
 
+If you restart Airflow and see `Address already in use`, a previous Airflow process may still be shutting down or holding a port open.
+Check the common ports with:
+
+```bash
+lsof -i :8080 -i :8793 -i :8794
+```
+
+Then stop the relevant process with:
+
+```bash
+kill <PID>
+```
+
 ## Airflow Command Reference
 
 These commands assume you have already created `.env` and set `AIRFLOW_HOME` correctly.
