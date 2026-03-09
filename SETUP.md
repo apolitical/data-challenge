@@ -64,42 +64,44 @@ Run dbt commands from `2-dbt_project/`:
 
 ```bash
 cd 2-dbt_project
+export DBT_PROFILES_DIR=$(pwd)
 ```
 
 Useful commands:
 
 ```bash
 # Check the DuckDB connection
-uv run dbt debug --profiles-dir .
+uv run dbt debug
 
 # Compile without running
-uv run dbt compile --profiles-dir .
+uv run dbt compile
 
 # Run everything
-uv run dbt run --profiles-dir .
+uv run dbt run
 
 # Run by layer
-uv run dbt run --select path:models/base --profiles-dir .
-uv run dbt run --select path:models/intermediate --profiles-dir .
-uv run dbt run --select path:models/marts --profiles-dir .
+uv run dbt run --select path:models/base
+uv run dbt run --select path:models/intermediate
+uv run dbt run --select path:models/marts
 
 # Run a specific model
-uv run dbt run --select base_users__users --profiles-dir .
+uv run dbt run --select base_users__users
 
 # Run tests
-uv run dbt test --profiles-dir .
-uv run dbt test --select source:raw --profiles-dir .
+uv run dbt test
+uv run dbt test --select source:raw
 
 # Inspect the graph
-uv run dbt ls --profiles-dir .
-uv run dbt ls --select source:* --profiles-dir .
+uv run dbt ls
+uv run dbt ls --select source:*
 
 # Generate docs
-uv run dbt docs generate --profiles-dir .
-uv run dbt docs serve --profiles-dir .
+uv run dbt docs generate
+uv run dbt docs serve
 ```
 
 Note: the repository uses `models/base/` as the first dbt layer.
+If you prefer to run dbt from the repository root, set `DBT_PROFILES_DIR=$(pwd)/2-dbt_project` instead.
 If you see a DuckDB lock error, close any open Jupyter notebook kernels or other processes connected to `mock_data.duckdb`, then rerun the dbt command.
 
 ## Optional: Airflow
