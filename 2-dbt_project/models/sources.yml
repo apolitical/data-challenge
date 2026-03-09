@@ -24,6 +24,7 @@ sources:
             description: "Timestamp of the latest row update."
           - name: deleted
             description: "Soft-delete flag."
+  
       - name: courses
         description: "Course catalog."
         columns:
@@ -39,6 +40,7 @@ sources:
             description: "Course publisher."
           - name: course_created_at
             description: "Date the course was created."
+  
       - name: enrolments
         description: "User course enrolments."
         columns:
@@ -52,6 +54,7 @@ sources:
             description: "Timestamp the user enrolled on the course."
           - name: status
             description: "Enrolment status."
+
       - name: events
         description: "User interaction events such as video and quiz activity."
         columns:
