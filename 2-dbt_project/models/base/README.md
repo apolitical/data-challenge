@@ -1,2 +1,2 @@
--- TODO: create base/staging model(s) here
--- This file is just a placeholder to show structure.
+-- Create base model(s) here.
+-- `legacy.sql` is only a starter reference and is safe to edit, replace, or delete.
