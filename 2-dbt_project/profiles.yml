@@ -1,7 +1,9 @@
 # dbt profile for DuckDB connection
-# This file should be placed in ~/.dbt/profiles.yml or referenced with --profiles-dir
+# Candidates can run dbt from 2-dbt_project/ after setting: export DBT_PROFILES_DIR=$(pwd)
+# This file defines the `course_engagement` profile used by dbt_project.yml
+# The DuckDB path is relative to this directory
 
-default:
+course_engagement:
   outputs:
     dev:
       type: duckdb

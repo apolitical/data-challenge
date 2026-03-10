@@ -3,13 +3,72 @@ version: 2
 sources:
   - name: raw
     schema: raw
-    description: "Raw data tables loaded from CSV files into DuckDB"
+    description: "Raw source tables loaded by scripts/init_db.py into the DuckDB raw schema."
     tables:
       - name: users
-        description: "User records (may contain duplicates and deleted users)"
+        description: "User records. This table may contain multiple versions of the same user and soft-deleted rows."
+        columns:
+          - name: id
+            description: "User identifier."
+          - name: fullName
+            description: "User's full name."
+          - name: email
+            description: "User's email address."
+          - name: signupDate
+            description: "Date the user signed up."
+          - name: state
+            description: "User's membership state."
+          - name: isGovEmployee
+            description: "Whether the user is marked as a government employee."
+          - name: updatedAt
+            description: "Timestamp of the latest row update."
+          - name: deleted
+            description: "Soft-delete flag."
+  
       - name: courses
-        description: "Course catalog"
+        description: "Course catalog."
+        columns:
+          - name: course_id
+            description: "Course identifier."
+          - name: title
+            description: "Course title."
+          - name: category_name
+            description: "Course category."
+          - name: level
+            description: "Course difficulty level."
+          - name: publisher
+            description: "Course publisher."
+          - name: course_created_at
+            description: "Date the course was created."
+  
       - name: enrolments
-        description: "User course enrolments"
+        description: "User course enrolments."
+        columns:
+          - name: enrolment_id
+            description: "Enrolment identifier."
+          - name: user_id
+            description: "User identifier."
+          - name: course_id
+            description: "Course identifier."
+          - name: enrolled_at
+            description: "Timestamp the user enrolled on the course."
+          - name: status
+            description: "Enrolment status."
+
       - name: events
-        description: "User interaction events (video, quiz, etc.)"
+        description: "User interaction events such as video and quiz activity."
+        columns:
+          - name: id
+            description: "Event identifier."
+          - name: user_id
+            description: "User identifier."
+          - name: course_id
+            description: "Course identifier."
+          - name: event_type
+            description: "Event type recorded for the interaction."
+          - name: event_timestamp
+            description: "Timestamp the event occurred."
+          - name: session_id
+            description: "Session identifier for the interaction."
+          - name: metadata
+            description: "Raw event metadata."

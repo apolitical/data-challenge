@@ -1,184 +1,111 @@
 # Data Challenge
 
-## Overview
+Timebox: **90-120 minutes**
 
-This exercise is designed to be completed in **1.5–2 hours** and assesses your ability to:
+This exercise is designed to assess how you:
 
-- Understand and refactor a complex SQL query
-- Structure transformations into sensible dbt layers (base / intermediate / marts)
-- Add basic data quality tests and documentation
-- Implement an Airflow DAG using the TaskFlow API to orchestrate dbt runs and data exports
+- reason about a messy SQL transformation
+- turn that logic into clear dbt models
+- add a small amount of testing and documentation
+- orchestrate the flow in Airflow with the TaskFlow API
 
-You do **not** need to get everything perfect or fully production-ready.
-We are most interested in how you think, how you structure things, and how you communicate trade-offs.
+You do not need to make everything production-ready. We care more about clear thinking, sensible structure, and good trade-offs.
 
-## Quick Start
+## Start Here
 
-This project uses **DuckDB** (embedded database) and **uv** (Python package manager)
+1. Install `uv`.
+2. Run `uv sync`.
+3. Run `uv run python scripts/init_db.py`.
+4. If you want to explore the data interactively, run `uv run jupyter lab`.
 
-### Prerequisites
+`SETUP.md` has the full setup guide, dbt commands, and Airflow commands.
 
-- [uv](https://github.com/astral-sh/uv) - Install with: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+## Repository Map
 
-### Setups
-
-> See `SETUP.md` for detailed instructions, DBT commands, jupyter notebook access, and Airflow commands.
-
-Run `uv sync` to prepare local repository.
-
-#### For Task 1 to 3
-
-```bash
-# 1. Initialize DuckDB database and load CSV data
-uv run python scripts/init_db.py
-
-# 2. (Optional) Start Jupyter to explore the data
-uv run jupyter lab # or jupyter notebook
-```
-
-#### For Task 4
-
-```bash
-# 1. Set up .env locally for Airflow Home
-cp default.env .env
-## Edit the variable "AIRFLOW_HOME" to Airflow's working directory with absolute path
-
-# 2. Start Airflow in standalone mode
-uv run --env-file .env airflow standalone
-## Starts a local Airflow cluster, 
-## Default user is "admin", password is in local file "standalone_admin_password.txt"
-## Webserver can be opened at http://127.0.0.1:8080/home
-```
-
-## Repository Structure
-
-- `data/` - Sample CSV data files
-  - `raw_users.csv`
-  - `raw_courses.csv`
-  - `raw_enrolments.csv`
-  - `raw_events.csv`
-- `1-sql/`
-  - `messy_course_engagement_duckdb.sql`  ← legacy query to refactor
-- `2-dbt_project/`
-  - `dbt_project.yml`
-  - `profiles.yml` - dbt configuration for DuckDB
-  - `models/`
-    - `base/` - Create your base/staging models here
-    - `intermediate/` - Create intermediate models here
-    - `marts/` - Create final mart models here
-    - `sources.yml` - Source table definitions
-- `3-airflow/dags/`
-  - `pipeline.py`  ← Airflow TaskFlow DAG to implement
-- `notebooks/`
-  - `example_data_exploration.ipynb` - Example queries to help you explore the data
-- `scripts/`
-  - `init_db.py` - Database initialization script
-
----
+- `data/`: sample CSV inputs
+- `1-sql/messy_course_engagement_duckdb.sql`: legacy query to inspect and refactor
+- `2-dbt_project/`: dbt project skeleton
+- `3-airflow/dags/pipeline.py`: Airflow DAG to complete
+- `notebooks/example_data_exploration.ipynb`: optional exploration notebook
 
 ## Scenario
 
-You've joined a small data team. A key stakeholder relies on a legacy query in `1-sql/messy_course_engagement_duckdb.sql` to understand course engagement.
+A stakeholder relies on the legacy query in `1-sql/messy_course_engagement_duckdb.sql` to understand course engagement.
 
-This query:
+The query works, but it is hard to maintain and extend. Your job is to turn it into a small, clearer analytics pipeline using dbt and Airflow.
 
-- Joins users, courses, enrolments, and events
-- Computes basic metrics at the **course** level
-- Is difficult to maintain and extend
-- Has some modelling and data quality issues (intentional anti-patterns!)
+## Important
 
-Your task is to refactor this into a small dbt project and implement Airflow orchestration.
+You are **absolutely free to edit** `1-sql/messy_course_engagement_duckdb.sql` directly.
 
-## Task 1 — Understand the Legacy Query
+It is intentionally messy. Treat it as working scratch code, not as something you need to preserve. You can simplify it, rewrite parts of it, or reduce it to smaller pieces as you work out the logic.
 
-1. Open `1-sql/messy_course_engagement_duckdb.sql`.
-2. Understand:
-   - What tables are involved?
-   - What is the **intended grain** of the final result?
-   - What metrics is it trying to compute?
-   - What are the anti-patterns in the query?
-3. You can explore the data using the Jupyter notebook: `notebooks/example_data_exploration.ipynb`
+## Task 1: Understand the Legacy Query
 
-**Note:** You do **not** need to give a long explanation, but it should be clear enough to justify your refactor into DBT models in Task 2. 
+Open `1-sql/messy_course_engagement_duckdb.sql` and work out:
 
-## Task 2 — Refactor into DBT Models
+- which tables it uses
+- the intended grain of the final result
+- which metrics it is trying to calculate
+- which modelling or SQL anti-patterns should be cleaned up
 
-Using the DBT project skeleton in `2-dbt_project/`:
+You do not need to write a long explanation. You only need enough understanding to justify the dbt structure you create in Task 2.
 
-1. Create **base(staging) models** in `models/base/`, for example:
-   - `base_users__users.sql`
-   - `base_courses__courses.sql`
-   - ...
-2. Create **intermediate model(s)** in `models/intermediate/`, for example:
-   - `intermediate_events__events.sql`
-   - ...
-3. Create **a final mart** in `models/marts/`, for example:
-   - `marts_courses__engagement.sql`
-     - The final mart should be at **one row per course** with metrics such as:
-       - `learners` - Distinct users enrolled
-       - `active_learners` - Distinct users with events
-       - `total_quizzes_completed`
-       - `total_videos_completed`
-       - `first_activity`
-       - `last_activity`
+`notebooks/example_data_exploration.ipynb` is available if you want to inspect the raw data first.
 
-**Notes:**
-- Use `ref()` and `source()` appropriately so that dependencies are clear.
+## Task 2: Refactor into dbt Models
 
-## Task 3 — Add Basic Tests and Documentation
+Use the skeleton in `2-dbt_project/` to build a simple layered dbt project:
+
+- `models/base/`: base or staging models over the raw tables
+- `models/intermediate/`: any intermediate transforms you need
+- `models/marts/`: the final mart
+
+The final mart should be **one row per course** and should include metrics such as:
+
+- `learners`: distinct users enrolled
+- `active_learners`: distinct users with events
+- `total_quizzes_completed`
+- `total_videos_completed`
+- `first_activity`
+- `last_activity`
+
+Use `source()` and `ref()` so the model dependencies are clear.
+
+## Task 3: Add Basic Tests and Documentation
 
 In `2-dbt_project/models/`:
 
-1. Add a `schema.yml` (or extend existing files) to define:
-   - At least **one or two models** with:
-     - `unique` and `not_null` tests on suitable keys
-     - A `relationships` test where appropriate
-2. Add brief **descriptions** for:
-   - The final mart model
-   - A few important columns
+- add `schema.yml` files, or extend the existing ones
+- add `unique` and `not_null` tests on suitable keys for at least one or two models
+- add a `relationships` test where it makes sense
+- add short descriptions for the final mart and a few important columns
 
-We are not expecting exhaustive coverage, just enough to demonstrate your approach.
+Keep this lightweight. We are looking for a sensible approach, not exhaustive coverage.
 
-## Task 4 — Airflow Orchestration (TaskFlow API)
+## Task 4: Airflow Orchestration
 
-Open `3-airflow/dags/pipeline.py`.
+Open `3-airflow/dags/pipeline.py` and complete the DAG.
 
-1. **Implement dbt orchestration tasks:**
-   - Update `run_base`, `run_intermediate`, and `run_marts` to call `dbt run` with appropriate `--select` flags
-   - Use sensible grouping to run the models
-   - Use `subprocess.run()` to execute dbt commands
-   - Add any other tasks that you think necessary for good practice
+Implement:
 
-2. **Add data export task:**
-   - Implement `report_data` to:
-     - Query the `analytics.marts_courses__engagement` table from DuckDB
-     - Export results to `output/reports/course_engagement_{date}.csv`
-     - Use Airflow's context variables for date templating (e.g., `context['ds']`)
-   - This simulates delivering results to stakeholders
+- `run_base`, `run_intermediate`, and `run_marts` using `subprocess.run()` and appropriate `dbt run --select ...` commands
+- `report_data` so it reads from `analytics.marts_courses__engagement` and writes `output/reports/course_engagement_{date}.csv`
+- use Airflow context variables for date templating, for example `context["ds"]`
+- task dependencies so the flow is `base -> intermediate -> marts -> check_mart_quality -> export_mart_report`
+- any extra task you think is useful for a clean design
 
-3. **(Bonus) Add quality check task:**
-   - Implement `check_mart_quality` to validate:
-     - Mart table has at least 1 row
-     - No nulls in key columns
-     - Raise an error or log warning if checks fail
+Bonus:
 
-4. **Ensure correct task dependencies:**
-   - `base` → `intermediate` → `marts` → `check_mart_quality` → `export_mart_report`
+- implement `check_mart_quality`
+- validate that the mart has at least one row
+- validate that key columns are not null
 
-See `SETUP.md` for detailed Airflow setup instructions.
+Focus on structure, clear task design, and reasonable error handling. Simple subprocess-based dbt execution is fine.
 
-**Notes:**
-- Focus on **structure**, **error handling**, and demonstrating understanding of the TaskFlow API
-- See the TODO comments in the DAG file for implementation examples
-- Simple subprocess calls are fine for dbt commands
+## Helpful References
 
----
-
-## Other Helpful Resources
-
-- **SETUP.md** - Detailed setup instructions and all commands
-- **notebooks/example_data_exploration.ipynb** - Example queries to explore the data
-- [dbt Documentation](https://docs.getdbt.com/)
-- [Airflow TaskFlow API](https://airflow.apache.org/docs/apache-airflow/stable/tutorial/taskflow.html)
-
-Good luck, and thank you for taking the time to complete this exercise!
+- `SETUP.md`
+- `notebooks/example_data_exploration.ipynb`
+- [dbt docs](https://docs.getdbt.com/)
+- [Airflow TaskFlow API docs](https://airflow.apache.org/docs/apache-airflow/stable/tutorial/taskflow.html)

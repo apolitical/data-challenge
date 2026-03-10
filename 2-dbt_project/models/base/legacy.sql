@@ -1,3 +1,6 @@
+-- Example starter model showing how the legacy SQL could be brought into dbt.
+-- Candidates are free to edit, replace, or delete this file as they refactor.
+
 WITH users_cleaned AS (
 
     SELECT
@@ -8,7 +11,7 @@ WITH users_cleaned AS (
         u.state AS user_state,
         COALESCE(u.isGovEmployee, FALSE) AS is_gov_employee,
         ROW_NUMBER() OVER (PARTITION BY u.id ORDER BY u.updatedAt DESC) AS user_version_rank
-    FROM raw.users AS u
+    FROM {{ source('raw', 'users') }} AS u
     WHERE COALESCE(u.deleted, FALSE) = FALSE
 
 ), users_deduped AS (
@@ -26,7 +29,7 @@ WITH users_cleaned AS (
         c.level,
         c.publisher,
         c.course_created_at
-    FROM raw.courses AS c
+    FROM {{ source('raw', 'courses') }} AS c
 
 ), enrolments_filtered AS (
 
@@ -37,7 +40,7 @@ WITH users_cleaned AS (
         e.enrolled_at,
         e.status,
         CAST(e.enrolled_at AS DATE) AS enrol_date
-    FROM raw.enrolments AS e
+    FROM {{ source('raw', 'enrolments') }} AS e
     WHERE e.status IS NULL OR e.status != 'cancelled'
 
 ), events_enriched AS (
@@ -56,7 +59,7 @@ WITH users_cleaned AS (
         END AS event_group,
         ev.session_id,
         SPLIT_PART(ev.metadata, ':', 2) AS meta_value
-    FROM raw.events AS ev
+    FROM {{ source('raw', 'events') }} AS ev
 
 ), combined AS (
 
@@ -83,7 +86,7 @@ WITH users_cleaned AS (
         MIN(e.enrolled_at) OVER (PARTITION BY e.user_id) AS user_first_enrolment,
         (
             SELECT COUNT(*)
-            FROM raw.enrolments AS e2
+            FROM {{ source('raw', 'enrolments') }} AS e2
             WHERE e2.user_id = e.user_id
         ) AS enrolment_count
     FROM enrolments_filtered AS e
