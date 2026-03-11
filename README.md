@@ -1,6 +1,6 @@
 # Data Challenge
 
-Timebox: **90-120 minutes**
+Timebox: **60-90 minutes**
 
 This exercise is designed to assess how you:
 
