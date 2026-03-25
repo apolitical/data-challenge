@@ -1,0 +1,2 @@
+-- Create base model(s) here.
+-- `legacy.sql` is only a starter reference and is safe to edit, replace, or delete.
