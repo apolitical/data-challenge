@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: base_calendar__dates
+    description: "Continuous date spine from first to last event date. One row per calendar date."
+    columns:
+      - name: calendar_date
+        description: "Calendar date"
+        tests:
+          - unique
+          - not_null

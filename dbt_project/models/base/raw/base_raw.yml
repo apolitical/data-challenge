@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: base_raw__users
+    description: "Deduplicated, non-deleted user records. One row per user."
+    columns:
+      - name: user_id
+        description: "Unique user identifier"
+        tests:
+          - unique
+          - not_null
+      - name: full_name
+        tests:
+          - not_null
+      - name: signup_date
+        tests:
+          - not_null
+
+  - name: base_raw__events
+    description: "Raw events, cleaned column names. One row per event."
+    columns:
+      - name: event_id
+        description: "Unique event identifier"
+        tests:
+          - unique
+          - not_null
+      - name: user_id
+        tests:
+          - not_null
+      - name: event_type
+        tests:
+          - not_null
+      - name: event_timestamp
+        tests:
+          - not_null
+
+  - name: base_raw__courses
+    description: "Course catalog. One row per course."
+    columns:
+      - name: course_id
+        description: "Unique course identifier"
+        tests:
+          - unique
+          - not_null
+      - name: title
+        tests:
+          - not_null
+
+  - name: base_raw__enrolments
+    description: "User course enrolments. One row per enrolment."
+    columns:
+      - name: enrolment_id
+        description: "Unique enrolment identifier"
+        tests:
+          - unique
+          - not_null
+      - name: user_id
+        tests:
+          - not_null
+      - name: course_id
+        tests:
+          - not_null
