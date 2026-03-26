@@ -5,7 +5,7 @@ Initialize DuckDB database with course engagement data.
 This script:
 1. Creates a DuckDB database file
 2. Creates the raw schema and tables
-3. Loads CSV data from data/
+3. Loads CSV data from mock_data/
 4. Creates indexes for query performance
 """
 
@@ -19,7 +19,7 @@ import duckdb
 DB_FILE = Path(__file__).parent.parent / 'mock_data.duckdb'
 
 # Base directory for data files
-DATA_DIR = Path(__file__).parent.parent / 'data'
+DATA_DIR = Path(__file__).parent.parent / 'mock_data'
 
 
 def get_connection():
@@ -174,6 +174,18 @@ def main():
     print(f"✅ Connected to DuckDB at {DB_FILE}\n")
 
     try:
+        # Generate events data (always regenerate for consistency)
+        print("🎲 Generating events data...")
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "generate_events",
+            Path(__file__).parent / "generate_events.py"
+        )
+        gen_mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(gen_mod)
+        gen_mod.main()
+        print()
+
         # Run initialization steps
         create_schema_and_tables(conn)
         load_csv_data(conn)

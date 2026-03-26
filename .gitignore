@@ -30,6 +30,9 @@ dbt_project/dbt_packages/
 dbt_project/package-lock.yml
 dbt_project/logs/
 
+# Generated data
+mock_data/raw_events.csv
+
 # DuckDB
 *.duckdb
 *.duckdb.wal

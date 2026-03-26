@@ -12,13 +12,16 @@ This repository contains technical challenges for data roles at Apolitical.
 ## Quick Start
 
 You should have received instructions on which challenge to complete.
-Clone the appropriate branch:
+See the challenge instructions in the appropriate branch:
+
+- [Data Lead → `DATA_LEAD.md`](../../tree/data-lead/DATA_LEAD.md)
+- [Analytics Engineer → `ANALYTIC_ENGINEER.md`](../../tree/analytics-engineer/ANALYTIC_ENGINEER.md)
+
+To get started, clone the branch:
 
 ```bash
 git clone -b <branch-name> <repo-url>
 ```
-
-Then follow the README in that branch.
 
 ## Shared Infrastructure
 
@@ -26,7 +29,7 @@ Both challenges use:
 - **DuckDB** as the local database engine
 - **dbt** for data modeling
 - **uv** as the Python package manager
-- Raw data in `data/` loaded via `scripts/init_db.py`
+- Raw data in `mock_data/` loaded via `scripts/init_db.py`
 
 ## Branch Policy
 
