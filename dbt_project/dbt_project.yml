@@ -10,7 +10,7 @@ model-paths: ['models']
 models:
   apolitical_data_challenge:
     base:
-      +materialized: view
+      +materialized: table
     intermediate:
       +materialized: view
     marts:
