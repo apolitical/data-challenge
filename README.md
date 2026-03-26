@@ -26,7 +26,7 @@ Both challenges use:
 - **DuckDB** as the local database engine
 - **dbt** for data modeling
 - **uv** as the Python package manager
-- Raw data in `data/` loaded via `scripts/init_db.py`
+- Raw data in `mock_data/` loaded via `scripts/init_db.py`
 
 ## Branch Policy
 
