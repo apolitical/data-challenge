@@ -5,7 +5,7 @@
 This exercise is designed to be completed in **1.5 hours** and assesses your 
 ability to:
 
-- Design a star schema with dimension and fact tables
+- Design a schema for marts models optimised for BI consumption
 - Build **rolling active user (RAU) metrics** using window/join patterns
 - Construct a **Cohort Retention Matrix** for later analysis
 - Structure dbt models across appropriate layers
@@ -44,7 +44,7 @@ uv run dbt test --select path:models/base --profiles-dir .
 | `raw_users.csv` | User records (may have duplicates and deleted users) | 80 |
 | `raw_courses.csv` | Course catalog | 60 |
 | `raw_enrolments.csv` | User course enrolments | 90 |
-| `raw_events.csv` | User interaction events (video, quiz) | 650 |
+| `raw_events.csv` | Script generated user interaction events (video, quiz) | 650 |
 
 ### Pre-built base models (`models/base/`)
 
@@ -62,29 +62,24 @@ See [DUCKDB_REFERENCE.md](DUCKDB_REFERENCE.md) for a BigQuery-to-DuckDB syntax m
 
 ---
 
-## Task 1 — Star Schema (Marts Layer)
+## Task 1 — Dimensional Model (Marts Layer)
 
-Build a star schema in `models/marts/` with dimension and fact tables.
+Build models in `models/marts/` that are optimised for BI tool consumption (e.g., ThoughtSpot, Looker, Tableau).
 
-### Dimensions
+Consider how these tools typically expect data to be structured for efficient querying and self-serve analytics. Think about:
 
-- **`dim_users`** — One row per user. Include relevant user attributes.
-- **`dim_courses`** — One row per course. Include course metadata.
-- **`dim_dates`** — One row per calendar date. Enrich with useful date attributes (day of week, is_weekend, week start, month, etc.)
-
-### Fact table
-
-- **`fct_events`** — One row per event. Include foreign keys to dimensions and any useful derived flags.
+- What are the core business entities and how should they be modelled?
+- What is the appropriate grain for each model?
+- How should fact and dimension tables relate to each other?
 
 ### Requirements
 
-1. Each dimension has a clear grain (one row per entity)
-2. The fact table references dimensions via foreign keys
-3. Add dbt tests: unique keys, not_null, and `relationships` tests between fact and dimensions
-4. Add brief descriptions in a `schema.yml`
+1. Each model has a clear, documented grain
+2. Relationships between models are explicit and testable
+3. Add appropriate dbt tests
+4. Add any other good modelling practices
 
-### Bonus
-- Add `fct_enrolments` as a second fact table
+See `models/marts/README.md` for additional hints.
 
 ---
 
@@ -104,7 +99,7 @@ Build dbt models that produce a **daily time-series** of active user counts.
 
 1. One row per calendar date, **no gaps** (use the date spine)
 2. Only include non-deleted users
-3. You may need an intermediate model (e.g., daily user activity grain)
+3. You may need an intermediate model
 4. Add dbt tests
 
 ### Expected output
@@ -159,10 +154,12 @@ Build a **weekly cohort retention** model.
 ```
 models/
 ├── base/           ← PROVIDED (don't modify)
-├── marts/          ← Task 1: dim_users, dim_courses, dim_dates, fct_events
-├── intermediate/   ← Task 2: daily activity grain (if needed)
-└── metrics/        ← Tasks 2 & 3: RAU metrics, cohort retention
+├── marts/          ← Task 1: dimensional model
+├── intermediate/   ← Reusable transforms (if needed)
+└── metrics/        ← Tasks 2 & 3: time-series and cohort metrics
 ```
+
+Each directory contains a `README.md` with hints.
 
 ## Helpful Resources
 
