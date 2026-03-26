@@ -1,22 +1,40 @@
+# Claude
 CLAUDE.md
+.claude/
+
+# Local env
 .venv/
 .zed/
 .env
 
+# Working notes
+ai-findings/
+ai-plannings/
+PLAN/
+
+# Challenge-specific (used by data-lead branch)
 1-sql/*
 !1-sql/messy_course_engagement_duckdb.sql
-
-2-dbt_project/target
-2-dbt_project/.user.yml
-
 3-airflow/dags/*
 !3-airflow/dags/pipeline.py
 
-# DuckDB database file
+# dbt
+2-dbt_project/target
+2-dbt_project/.user.yml
+2-dbt_project/dbt_packages/
+2-dbt_project/package-lock.yml
+2-dbt_project/logs/
+dbt_project/target
+dbt_project/.user.yml
+dbt_project/dbt_packages/
+dbt_project/package-lock.yml
+dbt_project/logs/
+
+# DuckDB
 *.duckdb
 *.duckdb.wal
 
-# Output files
+# Output
 output/
 
 # Airflow

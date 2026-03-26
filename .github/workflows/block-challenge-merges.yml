@@ -1,0 +1,20 @@
+name: Block challenge branch merges
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-source-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Block challenge branch merges into main
+        if: contains(fromJSON('["data-lead","analytics-engineer"]'), github.head_ref)
+        run: |
+          echo "::error::Challenge branches (data-lead, analytics-engineer) should not be merged into main."
+          echo "Each challenge branch is self-contained. Merging would break the branch-per-challenge structure."
+          exit 1
+
+      - name: Allow other PRs
+        if: "!contains(fromJSON('[\"data-lead\",\"analytics-engineer\"]'), github.head_ref)"
+        run: echo "PR from '${{ github.head_ref }}' is allowed."
