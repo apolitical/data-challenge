@@ -22,7 +22,7 @@ You do not need to make everything production-ready. We care more about clear th
 
 ## Repository Map
 
-- `data/`: sample CSV inputs
+- `mock_data/`: sample CSV inputs
 - `1-sql/messy_course_engagement_duckdb.sql`: legacy query to inspect and refactor
 - `2-dbt_project/`: dbt project skeleton
 - `3-airflow/dags/pipeline.py`: Airflow DAG to complete

@@ -24,7 +24,7 @@ This will:
 - install Python dependencies
 - create `mock_data.duckdb` in the project root
 - create the `raw` schema and tables
-- load the CSV files from `data/`
+- load the CSV files from `mock_data/`
 - create indexes
 - verify the row counts
 
