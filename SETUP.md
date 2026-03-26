@@ -19,7 +19,7 @@ uv sync
 uv run python scripts/init_db.py
 ```
 
-This creates `mock_data.duckdb` and loads the raw CSV data from `data/`.
+This creates `mock_data.duckdb` and loads the raw CSV data from `mock_data/`.
 
 ### 3. Verify dbt connection
 

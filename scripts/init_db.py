@@ -5,7 +5,7 @@ Initialize DuckDB database with course engagement data.
 This script:
 1. Creates a DuckDB database file
 2. Creates the raw schema and tables
-3. Loads CSV data from data/
+3. Loads CSV data from mock_data/
 4. Creates indexes for query performance
 """
 

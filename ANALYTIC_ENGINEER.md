@@ -38,7 +38,7 @@ uv run dbt test --select path:models/base --profiles-dir .
 
 ## What's Provided
 
-### Raw data (`data/`)
+### Raw data (`mock_data/`)
 | Table | Description | Rows |
 |-------|-------------|------|
 | `raw_users.csv` | User records (may have duplicates and deleted users) | 80 |
