@@ -1,16 +1,14 @@
 # Marts Layer
 
-Build your star schema here (Task 1).
+Build your final business-facing models here (Task 1).
 
-## Expected models
+This layer should be optimised for consumption by BI tools and downstream analytics.
 
-- `dim_users` — User dimension (one row per user)
-- `dim_courses` — Course dimension (one row per course)
-- `dim_dates` — Date dimension (one row per calendar date, enriched)
-- `fct_events` — Event fact table (one row per event, with FK references)
+## Hints
 
-## Tips
-
+- Consider how BI tools (e.g., ThoughtSpot, Looker, Tableau) typically expect data to be structured for efficient querying and self-serve analytics
+- Think about star schema or snowflake schema — which is more appropriate here?
+- What grain should each model have?
 - Use `{{ ref('base_raw__users') }}` etc. to reference the provided base models
 - Add a `schema.yml` with tests (unique, not_null, relationships)
 - Materialized as `table` (configured in dbt_project.yml)
