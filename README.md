@@ -15,7 +15,7 @@ You should have received instructions on which challenge to complete.
 See the challenge instructions in the appropriate branch:
 
 - [Data Lead → `DATA_LEAD.md`](../../tree/data-lead/DATA_LEAD.md)
-- [Analytics Engineer → `ANALYTIC_ENGINEER.md`](../../tree/analytics-engineer/ANALYTIC_ENGINEER.md)
+- [Analytics Engineer → `ANALYTICS_ENGINEER.md`](../../tree/analytics-engineer/ANALYTICS_ENGINEER.md)
 
 To get started, clone the branch:
 
