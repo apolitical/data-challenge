@@ -1,6 +1,6 @@
 # Marts Layer
 
-Build your final business-facing models here (Task 1).
+Build your final business-facing models here (Task 3, optional).
 
 This layer should be optimised for consumption by BI tools and downstream analytics.
 

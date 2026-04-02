@@ -5,7 +5,6 @@
 This exercise is designed to be completed in **~1-1.5 hours** and assesses your 
 ability to:
 
-- Design a schema for marts models optimised for BI consumption
 - Build **rolling active user (RAU) metrics** using window/join patterns
 - Construct a **Cohort Retention Matrix** for later analysis
 - Structure dbt models across appropriate layers
@@ -40,6 +39,15 @@ cd ..
 uv run jupyter lab
 ```
 
+## About the Data
+
+The mock data simulates an **online learning platform** where users sign up, enrol in courses, and interact with course content through videos and quizzes.
+
+- **Users** sign up and may be updated or soft-deleted over time
+- **Courses** are published across categories (Climate, Leadership, Digital, etc.) and difficulty levels
+- **Enrolments** link users to courses with a status (active, completed, cancelled)
+- **Events** capture user interactions: `video_start`, `video_complete`, `quiz_start`, `quiz_submit`
+
 ## What's Provided
 
 ### Raw data (`mock_data/`)
@@ -66,28 +74,7 @@ See [DUCKDB_REFERENCE.md](DUCKDB_REFERENCE.md) for a BigQuery-to-DuckDB syntax m
 
 ---
 
-## Task 1 — Dimensional Model (Marts Layer)
-
-Build models in `models/marts/` that are optimised for BI tool consumption (e.g., ThoughtSpot, Looker, Tableau).
-
-Consider how these tools typically expect data to be structured for efficient querying and self-serve analytics. Think about:
-
-- What are the core business entities and how should they be modelled?
-- What is the appropriate grain for each model?
-- How should fact and dimension tables relate to each other?
-
-### Requirements
-
-1. Each model has a clear, documented grain
-2. Relationships between models are explicit and testable
-3. Add appropriate dbt tests
-4. Add any other good modelling practices
-
-See `models/marts/README.md` for additional hints.
-
----
-
-## Task 2 — Rolling Active Users (Metrics Layer)
+## Task 1 — Rolling Active Users (Metrics Layer)
 
 Build dbt models that produce a **daily time-series** of active user counts.
 
@@ -121,7 +108,7 @@ Build dbt models that produce a **daily time-series** of active user counts.
 
 ---
 
-## Task 3 — Cohort Retention (Metrics Layer)
+## Task 2 — Cohort Retention (Metrics Layer)
 
 Build a **weekly cohort retention** model.
 
@@ -154,14 +141,35 @@ Build a **weekly cohort retention** model.
 
 ---
 
+## Task 3 (Optional) — Dimensional Model (Marts Layer)
+
+Build models in `models/marts/` that are optimised for BI tool consumption (e.g., ThoughtSpot, Looker, Tableau).
+
+Consider how these tools typically expect data to be structured for efficient querying and self-serve analytics. Think about:
+
+- What are the core business entities and how should they be modelled?
+- What is the appropriate grain for each model?
+- How should fact and dimension tables relate to each other?
+
+### Requirements
+
+1. Each model has a clear, documented grain
+2. Relationships between models are explicit and testable
+3. Add appropriate dbt tests
+4. Add any other good modelling practices
+
+See `models/marts/README.md` for additional hints.
+
+---
+
 ## Where to Put Your Models
 
 ```
 models/
 ├── base/           ← PROVIDED (don't modify)
-├── marts/          ← Task 1: dimensional model
 ├── intermediate/   ← Reusable transforms (if needed)
-└── metrics/        ← Tasks 2 & 3: time-series and cohort metrics
+├── metrics/        ← Tasks 1 & 2: time-series and cohort metrics
+└── marts/          ← Task 3 (optional): dimensional model
 ```
 
 Each directory contains a `README.md` with hints.
