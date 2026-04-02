@@ -2,7 +2,7 @@
 
 ## Overview
 
-This exercise is designed to be completed in **1.5 hours** and assesses your 
+This exercise is designed to be completed in **~1-1.5 hours** and assesses your 
 ability to:
 
 - Design a schema for marts models optimised for BI consumption
@@ -160,6 +160,16 @@ models/
 ```
 
 Each directory contains a `README.md` with hints.
+
+## Exploring & Verifying
+
+A Jupyter notebook is provided for data exploration and result verification:
+
+```bash
+uv run jupyter lab
+```
+
+Open `notebooks/data_exploration.ipynb` — the **"Verify Your Results"** section at the bottom uses pandas on the raw CSV data to spot-check your dbt model output (DAU counts, WAU windows, cohort retention).
 
 ## Helpful Resources
 

@@ -50,6 +50,14 @@ uv run dbt test --select path:models/base --profiles-dir .
 
 You're ready to start building!
 
+### 7. (Optional) Launch JupyterLab
+
+```bash
+uv run jupyter lab
+```
+
+A notebook is provided at `notebooks/data_exploration.ipynb` for interactive data exploration.
+
 ## Useful Commands
 
 ```bash
@@ -86,6 +94,16 @@ dbt_project/
 │   └── metrics/          # Tasks 2 & 3 — build metric models here
 └── tests/                # Custom data tests
 ```
+
+## Verifying Your Results
+
+After building your models, open the notebook to spot-check your output:
+
+```bash
+uv run jupyter lab
+```
+
+The **"Verify Your Results"** section at the bottom of `notebooks/data_exploration.ipynb` uses pandas on the raw CSV data to compute expected values (e.g. DAU per date, cohort sizes), then compares them against your dbt models in the `analytics` schema.
 
 ## Troubleshooting
 
