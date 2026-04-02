@@ -110,8 +110,9 @@ Build dbt models that produce a **daily time-series** of active user counts.
 
 | window_end_date | dau | wau | mau |
 |-----------------|-----|-----|-----|
-| 2023-03-03      | 2   | 2   | 2   |
-| 2023-03-04      | 3   | 4   | 4   |
+| 2023-03-03      | 3   | 3   | 3   |
+| 2023-03-04      | 0   | 3   | 3   |
+| 2023-03-05      | 3   | 6   | 6   |
 | ...             | ... | ... | ... |
 
 ### Bonus
@@ -144,9 +145,9 @@ Build a **weekly cohort retention** model.
 
 | cohort_week | periods_since | cohort_size | active_users | retention_rate |
 |-------------|---------------|-------------|--------------|----------------|
-| 2023-03-06  | 0             | 12          | 10           | 0.83           |
-| 2023-03-06  | 1             | 12          | 7            | 0.58           |
-| 2023-03-06  | 2             | 12          | 5            | 0.42           |
+| 2023-03-27  | 0             | 4           | 2            | 0.50           |
+| 2023-03-27  | 1             | 4           | 4            | 1.00           |
+| 2023-03-27  | 2             | 4           | 1            | 0.25           |
 
 ### Bonus
 - Add monthly cohort retention as a separate model
