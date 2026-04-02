@@ -1,0 +1,19 @@
+name: 'apolitical_data_challenge'
+version: '1.0.0'
+config-version: 2
+
+profile: 'default'
+
+model-paths: ['models']
+# Seeds not needed - data loaded directly into DuckDB
+
+models:
+  apolitical_data_challenge:
+    base:
+      +materialized: table
+    intermediate:
+      +materialized: view
+    marts:
+      +materialized: table
+    metrics:
+      +materialized: table
