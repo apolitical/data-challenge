@@ -39,6 +39,15 @@ cd ..
 uv run jupyter lab
 ```
 
+## About the Data
+
+The mock data simulates an **online learning platform** where users sign up, enrol in courses, and interact with course content through videos and quizzes.
+
+- **Users** sign up and may be updated or soft-deleted over time
+- **Courses** are published across categories (Climate, Leadership, Digital, etc.) and difficulty levels
+- **Enrolments** link users to courses with a status (active, completed, cancelled)
+- **Events** capture user interactions: `video_start`, `video_complete`, `quiz_start`, `quiz_submit`
+
 ## What's Provided
 
 ### Raw data (`mock_data/`)
