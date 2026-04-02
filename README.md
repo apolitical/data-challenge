@@ -7,7 +7,7 @@ This repository contains technical challenges for data roles at Apolitical.
 | Challenge | Target Role | Branch | Time |
 |-----------|-------------|--------|------|
 | [Data Lead](../../tree/data-lead) | Data Lead / Senior Data Engineer | `data-lead` | ~1.5–2 hours |
-| [Analytics Engineer](../../tree/analytics-engineer) | Analytics Engineer | `analytics-engineer` | ~1.5 hours |
+| [Analytics Engineer](../../tree/analytics-engineer) | Analytics Engineer | `analytics-engineer` | ~1-1.5 hours |
 
 ## Quick Start
 
