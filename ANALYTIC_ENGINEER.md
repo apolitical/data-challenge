@@ -34,6 +34,10 @@ uv run dbt debug --profiles-dir .
 # 4. Run the provided base models
 uv run dbt run --select path:models/base --profiles-dir .
 uv run dbt test --select path:models/base --profiles-dir .
+
+# 5. (Optional) Explore the data in JupyterLab
+cd ..
+uv run jupyter lab
 ```
 
 ## What's Provided
