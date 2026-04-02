@@ -36,51 +36,6 @@ This challenge uses **DuckDB** as the local database. If you're coming from BigQ
 | COUNT DISTINCT in window | Not supported | Not supported | Not supported — use `COUNT(DISTINCT CASE WHEN ... THEN id END)` |
 | ROW_NUMBER | `ROW_NUMBER() OVER (...)` | `ROW_NUMBER() OVER (...)` | `ROW_NUMBER() OVER (...)` *(same)* |
 
-## Patterns You'll Need
-
-### Date spine (provided in `base_calendar__dates`)
-```sql
--- DuckDB: generate a continuous series of dates
-SELECT d::DATE AS calendar_date
-FROM generate_series(DATE '2023-01-01', DATE '2023-12-31', INTERVAL '1 day') AS t(d);
-```
-
-### Rolling distinct count (for RAU metrics)
-```sql
--- COUNT(DISTINCT x) OVER (...) doesn't work — use this pattern instead:
-SELECT
-    dates.calendar_date,
-    COUNT(DISTINCT CASE
-        WHEN activity.date >= dates.calendar_date - INTERVAL '6 days'
-        THEN activity.user_id
-    END) AS rolling_7d_users
-FROM dates
-LEFT JOIN activity
-    ON activity.date BETWEEN dates.calendar_date - INTERVAL '6 days' AND dates.calendar_date
-GROUP BY dates.calendar_date;
-```
-
-### Weekly cohort grouping (for retention)
-```sql
--- Truncate signup date to Monday of that week
-DATE_TRUNC('week', signup_date)
-
--- Count weeks between two dates
-DATE_DIFF('week', cohort_week, activity_week)
-```
-
-### Enriching a date dimension
-```sql
--- Useful date attributes
-DAYOFWEEK(d)                          -- 0=Sun, 6=Sat
-DAYNAME(d)                            -- 'Monday', 'Tuesday', etc.
-DAYOFWEEK(d) IN (0, 6)               -- is_weekend
-DATE_TRUNC('week', d)::DATE          -- week_start (Monday)
-DATE_TRUNC('month', d)::DATE         -- month_start
-MONTHNAME(d)                          -- 'January', 'February', etc.
-STRFTIME(d, '%Y%m%d')                -- integer-friendly date key
-```
-
 ## Gotchas
 
 - `RANGE BETWEEN INTERVAL '27 days' PRECEDING` is inclusive of both endpoints — covers **28 days** total

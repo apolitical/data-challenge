@@ -62,7 +62,7 @@ These are **provided and working** — you don't need to modify them:
 
 ### DuckDB SQL reference
 
-See [DUCKDB_REFERENCE.md](DUCKDB_REFERENCE.md) for a BigQuery-to-DuckDB syntax mapping. Key gotcha: `COUNT(DISTINCT x) OVER (...)` does **not** work in DuckDB — see the reference for workarounds.
+See [DUCKDB_REFERENCE.md](DUCKDB_REFERENCE.md) for a BigQuery-to-DuckDB syntax mapping.
 
 ---
 
