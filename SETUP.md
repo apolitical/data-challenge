@@ -89,9 +89,9 @@ dbt_project/
 ├── models/
 │   ├── sources.yml       # Raw data source definitions
 │   ├── base/             # Provided — cleaned raw data models
-│   ├── marts/            # Task 1 — build your star schema here
-│   ├── intermediate/     # Task 2 — build intermediate models here
-│   └── metrics/          # Tasks 2 & 3 — build metric models here
+│   ├── intermediate/     # Reusable transforms (if needed)
+│   ├── metrics/          # Tasks 1 & 2 — build metric models here
+│   └── marts/            # Task 3 (optional) — build your star schema here
 └── tests/                # Custom data tests
 ```
 
