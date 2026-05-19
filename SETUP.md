@@ -10,6 +10,8 @@ Install `uv`:
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
+If you already have another Python virtualenv active (for example via `pyenv` or `conda`), `uv` will print a warning that `VIRTUAL_ENV` does not match the project's `.venv`. It is safe to ignore. To silence it, run `deactivate` (or `conda deactivate`) before running `uv` commands.
+
 ## Quick Start
 
 From the repository root:

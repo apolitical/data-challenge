@@ -30,6 +30,8 @@ sources:
         columns:
           - name: course_id
             description: "Course identifier."
+            tests:
+              - not_null
           - name: title
             description: "Course title."
           - name: category_name
