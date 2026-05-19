@@ -16,7 +16,13 @@ random.seed(42)
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 USERS_CSV = PROJECT_ROOT / "mock_data" / "raw_users.csv"
 COURSES_CSV = PROJECT_ROOT / "mock_data" / "raw_courses.csv"
+ENROLMENTS_CSV = PROJECT_ROOT / "mock_data" / "raw_enrolments.csv"
 OUTPUT_CSV = PROJECT_ROOT / "mock_data" / "raw_events.csv"
+
+# Probability that an event for a user lands on one of the courses they're
+# enrolled in (when they have at least one eligible enrolment). Reflects the
+# fact that most platform activity happens on courses users have signed up to.
+ENROLLED_BIAS = 0.85
 
 # Date range
 START_DATE = datetime(2023, 3, 3)
@@ -45,13 +51,29 @@ def load_users():
 
 
 def load_courses():
-    """Load all course IDs."""
+    """Load courses that were available during the event window."""
     courses = []
     with open(COURSES_CSV, newline="") as f:
         reader = csv.DictReader(f)
         for row in reader:
-            courses.append(int(row["course_id"]))
+            created = datetime.strptime(row["course_created_at"], "%Y-%m-%d")
+            if created <= END_DATE:
+                courses.append(int(row["course_id"]))
     return courses
+
+
+def load_enrolments_by_user(eligible_courses):
+    """Build a user_id -> list of enrolled, eligible course_ids lookup."""
+    eligible_set = set(eligible_courses)
+    by_user = {}
+    with open(ENROLMENTS_CSV, newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            uid = int(row["user_id"])
+            cid = int(row["course_id"])
+            if cid in eligible_set:
+                by_user.setdefault(uid, []).append(cid)
+    return by_user
 
 
 def generate_session_id():
@@ -73,6 +95,7 @@ def generate_metadata(event_type):
 def main():
     users = load_users()
     courses = load_courses()
+    enrolments_by_user = load_enrolments_by_user(courses)
 
     user_ids = sorted(users.keys())
     print(f"Non-deleted users: {len(user_ids)}")
@@ -136,7 +159,13 @@ def main():
             if current_date < signup_date:
                 continue
 
-            course_id = random.choice(courses)
+            # Prefer courses the user is enrolled in, with occasional drift
+            # to other courses to reflect browsing/preview behaviour.
+            user_enrolled = enrolments_by_user.get(uid)
+            if user_enrolled and random.random() < ENROLLED_BIAS:
+                course_id = random.choice(user_enrolled)
+            else:
+                course_id = random.choice(courses)
             event_type = random.choice(EVENT_TYPES)
 
             # Random time during the day (biased toward working hours)

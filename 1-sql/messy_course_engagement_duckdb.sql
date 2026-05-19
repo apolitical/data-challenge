@@ -75,7 +75,7 @@ WITH users_cleaned AS (
         ev.event_timestamp,
         ev.session_id,
         CASE
-            WHEN ev.event_type IN ('video_start', 'video_complete', 'quiz_start', 'quiz_submit')
+            WHEN ev.event_type IN ('video_start', 'video_complete', 'quiz_submit')
             THEN 1 ELSE 0
         END AS engagement_flag,
         CASE WHEN ev.event_type = 'quiz_submit' THEN 1 ELSE 0 END AS completed_quiz,
@@ -124,4 +124,5 @@ SELECT
     ) AS engagement_rate
 FROM aggregated AS a
 WHERE a.course_id IS NOT NULL
+  AND a.first_activity IS NOT NULL -- exclude courses with no activity
 ORDER BY learners DESC, course_id

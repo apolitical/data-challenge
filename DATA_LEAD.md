@@ -1,109 +1,90 @@
-# Data Challenge
+# Data Lead Challenge
 
-Timebox: **60-90 minutes**
+Timebox: **90 minutes**
 
-This exercise is designed to assess how you:
+This is a live coding exercise. You'll share your screen and talk through your decisions as you go. AI tools (Claude Code, Cursor, Copilot, ChatGPT, etc.) are welcome, we're interested in how you use them as much as in what you produce.
 
-- reason about a messy SQL transformation
-- turn that logic into clear dbt models
-- add a small amount of testing and documentation
-- orchestrate the flow in Airflow with the TaskFlow API
+## What to expect
 
-You do not need to make everything production-ready. We care more about clear thinking, sensible structure, and good trade-offs.
+| Time | What happens |
+|---|---|
+| 0-15 min | You read the email below and the legacy SQL in `1-sql/messy_course_engagement_duckdb.sql`. We then ask you to talk through what the SQL is doing and what concerns you have. No coding yet. |
+| 15-60 min | You build out the dbt project. AI tools welcome. |
+| 60-80 min | Follow-up questions about your work, plus a quick self-review: "imagine this was a colleague's PR, what would you call out?" |
+| 80-90 min | Your turn: any questions you have for us. |
 
-## Start Here
+We care more about clear thinking, sensible trade-offs, and your judgment than about polished output. If anything in the brief below is unclear, just ask, the interviewer is happy to clarify on Sam's behalf.
+
+## The scenario
+
+You've just joined as data lead. A legacy SQL query (`1-sql/messy_course_engagement_duckdb.sql`) produces a course engagement view that Sam from Learning Ops relies on. Sam wants you to take it over and turn it into something cleaner. You've received the following email from them:
+
+---
+
+> **From:** Sam Patel <sam.patel@example.com>
+> **To:** You
+> **Subject:** taking over the course engagement query, quick brief
+>
+> Hi,
+>
+> Welcome aboard! Really glad someone's owning this properly now.
+>
+> Quick context on what I need from the course engagement data. We use it for the weekly board pack, so the headline thing is **one row per course** showing how each course is doing.
+>
+> Things I usually look at:
+>
+> - how many learners we've got on each course
+> - active learners, the ones really using the platform. I tend to think of this as people who've done something in the last 30 days, but I'm flexible if you've got a better definition
+> - whether they're getting through the content (videos, quizzes, that sort of thing)
+> - when activity is happening
+>
+> Honestly, "course health" is the vibe. If you spot anything in the existing query that doesn't match what I just described, flag it, I haven't looked at the SQL in months and it might be doing something different.
+>
+> The existing query works (I think?), it's just hard to maintain. Could you turn it into something cleaner using dbt? A few light tests would be nice too.
+>
+> Shout if anything's unclear.
+>
+> Thanks!
+> Sam
+
+---
+
+## Setup
 
 1. Install `uv`.
 2. Run `uv sync`.
 3. Run `uv run python scripts/init_db.py`.
-4. If you want to explore the data interactively, run `uv run jupyter lab`.
+4. Optional: `uv run jupyter lab` to explore the data interactively.
 
-`SETUP.md` has the full setup guide, dbt commands, and Airflow commands.
+See `SETUP.md` for the full setup guide, dbt commands, and Airflow commands.
 
-## Repository Map
+## Repository map
 
 - `mock_data/`: sample CSV inputs
-- `1-sql/messy_course_engagement_duckdb.sql`: legacy query to inspect and refactor
-- `2-dbt_project/`: dbt project skeleton
-- `3-airflow/dags/pipeline.py`: Airflow DAG to complete
+- `1-sql/messy_course_engagement_duckdb.sql`: legacy query, kept as a read-only reference
+- `2-dbt_project/`: dbt project skeleton, including an editable copy of the legacy query at `models/base/legacy.sql`
+- `3-airflow/dags/pipeline.py`: Airflow DAG skeleton (stretch goal only)
 - `notebooks/example_data_exploration.ipynb`: optional exploration notebook
 
-## Scenario
+## The task
 
-A stakeholder relies on the legacy query in `1-sql/messy_course_engagement_duckdb.sql` to understand course engagement.
+Turn the legacy SQL into a small, clean dbt pipeline that answers Sam's brief.
 
-The query works, but it is hard to maintain and extend. Your job is to turn it into a small, clearer analytics pipeline using dbt and Airflow.
+- Use the `2-dbt_project/` skeleton: `models/base/`, `models/intermediate/`, `models/marts/`.
+- Use `source()` and `ref()` so the model dependencies are clear.
+- The final mart should be **one row per course** (per Sam's anchor).
+- Decide what metrics to compute and how to define them. Be ready to justify your choices.
+- Add a small amount of testing (`unique`, `not_null`, and a `relationships` test) and short descriptions on the final mart.
 
-## Important
+You are **absolutely free to edit** `2-dbt_project/models/base/legacy.sql`, which is an editable copy of the messy query already wired up to `{{ source(...) }}` refs. Treat it as working scratch code, not something you need to preserve. You can simplify it, rewrite parts of it, or break it into smaller pieces as you work out the logic. The original `1-sql/messy_course_engagement_duckdb.sql` is a read-only reference, please leave it alone.
 
-You are **absolutely free to edit** `1-sql/messy_course_engagement_duckdb.sql` directly.
+## Stretch goal: Airflow
 
-It is intentionally messy. Treat it as working scratch code, not as something you need to preserve. You can simplify it, rewrite parts of it, or reduce it to smaller pieces as you work out the logic.
+If you finish with time to spare, open `3-airflow/dags/pipeline.py` and wire the dbt models behind an Airflow DAG. There are TODOs in the skeleton: implement `run_base`, `run_intermediate`, `run_marts`, and `report_data` (export `analytics.marts_courses__engagement` to `output/reports/course_engagement_{date}.csv`), and chain them.
 
-## Task 1: Understand the Legacy Query
+This is **optional**. We'd rather see a thoughtful dbt model with one or two well-chosen tests than a rushed mart plus a half-working DAG.
 
-Open `1-sql/messy_course_engagement_duckdb.sql` and work out:
-
-- which tables it uses
-- the intended grain of the final result
-- which metrics it is trying to calculate
-- which modelling or SQL anti-patterns should be cleaned up
-
-You do not need to write a long explanation. You only need enough understanding to justify the dbt structure you create in Task 2.
-
-`notebooks/example_data_exploration.ipynb` is available if you want to inspect the raw data first.
-
-## Task 2: Refactor into dbt Models
-
-Use the skeleton in `2-dbt_project/` to build a simple layered dbt project:
-
-- `models/base/`: base or staging models over the raw tables
-- `models/intermediate/`: any intermediate transforms you need
-- `models/marts/`: the final mart
-
-The final mart should be **one row per course** and should include metrics such as:
-
-- `learners`: distinct users enrolled
-- `active_learners`: distinct users with events
-- `total_quizzes_completed`
-- `total_videos_completed`
-- `first_activity`
-- `last_activity`
-
-Use `source()` and `ref()` so the model dependencies are clear.
-
-## Task 3: Add Basic Tests and Documentation
-
-In `2-dbt_project/models/`:
-
-- add `schema.yml` files, or extend the existing ones
-- add `unique` and `not_null` tests on suitable keys for at least one or two models
-- add a `relationships` test where it makes sense
-- add short descriptions for the final mart and a few important columns
-
-Keep this lightweight. We are looking for a sensible approach, not exhaustive coverage.
-
-## Task 4: Airflow Orchestration
-
-Open `3-airflow/dags/pipeline.py` and complete the DAG.
-
-Implement:
-
-- `run_base`, `run_intermediate`, and `run_marts` using `subprocess.run()` and appropriate `dbt run --select ...` commands
-- `report_data` so it reads from `analytics.marts_courses__engagement` and writes `output/reports/course_engagement_{date}.csv`
-- use Airflow context variables for date templating, for example `context["ds"]`
-- task dependencies so the flow is `base -> intermediate -> marts -> check_mart_quality -> export_mart_report`
-- any extra task you think is useful for a clean design
-
-Bonus:
-
-- implement `check_mart_quality`
-- validate that the mart has at least one row
-- validate that key columns are not null
-
-Focus on structure, clear task design, and reasonable error handling. Simple subprocess-based dbt execution is fine.
-
-## Helpful References
+## Helpful references
 
 - `SETUP.md`
 - `notebooks/example_data_exploration.ipynb`
