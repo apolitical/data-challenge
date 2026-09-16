@@ -1,9 +1,16 @@
 [project]
-name = "apolitical-data-challenge"
+name = "apolitical-senior-data-engineer"
 version = "0.1.0"
-description = "Apolitical technical challenges for data roles"
-requires-python = ">=3.9"
+description = "Apolitical Senior Data Engineer technical test: an incident in a CRM sync pipeline"
+requires-python = ">=3.11,<3.13"
 dependencies = [
-    "duckdb>=0.9.0",
+    "apache-airflow==2.11.0",
+    "dbt-core>=1.7.0",
+    "dbt-duckdb>=1.7.0",
+    "duckdb>=1.1.0,<2.0.0",
+    "flask>=2.2.0",
     "pandas>=2.0.0",
+    "pytest>=9.1.1",
+    "requests>=2.31.0",
+    "pyyaml>=6.0",
 ]

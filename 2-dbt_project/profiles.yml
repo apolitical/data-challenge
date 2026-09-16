@@ -1,0 +1,13 @@
+# dbt profile for the local DuckDB warehouse.
+# Run dbt from this directory after: export DBT_PROFILES_DIR=$(pwd)
+# The DuckDB path is relative to this directory.
+
+apolitical_engagement:
+  outputs:
+    dev:
+      type: duckdb
+      path: ../mock_data.duckdb
+      schema: analytics
+      threads: 4
+
+  target: dev

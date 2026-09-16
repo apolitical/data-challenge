@@ -12,11 +12,11 @@ ai-findings/
 ai-plannings/
 PLAN/
 
-# Challenge-specific (used by data-lead branch)
-1-sql/*
-!1-sql/messy_course_engagement_duckdb.sql
-3-airflow/dags/*
-!3-airflow/dags/pipeline.py
+# Directories belonging to other challenge branches, present in a shared working
+# tree. Not part of this challenge and must never be committed to it.
+dbt_project/
+1-sql/
+notebooks/
 
 # dbt
 2-dbt_project/target
@@ -24,21 +24,19 @@ PLAN/
 2-dbt_project/dbt_packages/
 2-dbt_project/package-lock.yml
 2-dbt_project/logs/
-dbt_project/target
-dbt_project/.user.yml
-dbt_project/dbt_packages/
-dbt_project/package-lock.yml
-dbt_project/logs/
 
-# Generated data
-mock_data/raw_events.csv
-
-# DuckDB
+# DuckDB. The fixtures in mock_data/ are committed; the database built from them is not.
 *.duckdb
 *.duckdb.wal
 
-# Output
-output/
+# Mock CRM state. The delivered snapshots ARE committed -- the incident has already
+# happened when the candidate opens the repository, so the CRM has to arrive holding
+# the wrong tiers, the recorded transitions and the emails its automation sent.
+# Only the write-ahead journal is runtime noise.
+mock_crm/state/*.journal.jsonl
+
+# Packaged archives
+dist/
 
 # Airflow
 airflow_home/
@@ -53,12 +51,10 @@ airflow-webserver*
 __pycache__/
 *.py[cod]
 *$py.class
+.pytest_cache/
 
 # Jupyter
 .ipynb_checkpoints/
-
-# uv
-uv.lock
 
 # IDEs
 .vscode/
