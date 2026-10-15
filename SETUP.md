@@ -27,6 +27,11 @@ That is everything needed to run the pipeline. Airflow is **optional** — step 
 the same sync task the DAG runs. If you do want the DAG, see *Running the DAG*; you only
 need to edit `.env` for that.
 
+Step 6 writes every member's current tier into the production CRM, overwriting what it
+holds now, including the record of what happened during the incident. That is reversible:
+`uv run python scripts/reset_state.py` puts it back. If you want to see the CRM as the
+incident left it, look before you run step 6, or reset afterwards.
+
 ## Supported environment
 
 Tested on **macOS (arm64) and Linux (x86_64)** with **Python 3.11 or 3.12**. Python 3.13
@@ -157,6 +162,10 @@ uv run --env-file .env python scripts/run_sync.py
 It takes the CRM's address from the environment, the same way the DAG's task does, so it
 needs a `.env` — `cp default.env .env` is enough, and the copy works unedited for the
 sync. The absolute paths in that file matter only if you go on to run Airflow.
+
+Running it overwrites the CRM's current state, including what it recorded during the
+incident. [*Replaying the incident, and putting it back*](#replaying-the-incident-and-putting-it-back)
+has the command that restores it.
 
 ## Replaying the incident, and putting it back
 

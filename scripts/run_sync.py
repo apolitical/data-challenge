@@ -16,6 +16,9 @@ So run it the way Airflow would:
 
 Start the CRM environment that `CRM_BASE_URL` points at first, or the sync has nothing
 to write to.
+
+This overwrites the CRM's current state, including what it recorded during the incident.
+`scripts/reset_state.py` restores it.
 """
 
 import os
