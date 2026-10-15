@@ -1,5 +1,15 @@
 # Setup
 
+## Getting this
+
+```bash
+git clone -b senior-data-engineer https://github.com/apolitical/data-challenge.git
+cd data-challenge
+```
+
+The branch is self-contained: everything the exercise needs is in it, and you do not
+need any other branch.
+
 ## The order to do things in
 
 Each step below assumes the ones above it.

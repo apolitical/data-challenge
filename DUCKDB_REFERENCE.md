@@ -12,6 +12,14 @@ uv run python -c "import duckdb; c = duckdb.connect('mock_data.duckdb', read_onl
 Read-only is worth using for exploration: it means nothing you run by hand can change
 the warehouse.
 
+`show tables` lists the current schema only. To see everything the warehouse holds,
+including which schema each table is in, use DuckDB's catalog function — it also works
+when the database is attached under a name rather than opened directly:
+
+```sql
+select schema_name, table_name from duckdb_tables() order by 1, 2;
+```
+
 It does **not** let you explore while `dbt` is building. DuckDB hands the database file
 to one process at a time, and a reader blocks a writer just as a writer does, so an open
 connection of either kind makes `dbt` fail with `Could not set lock on file`. That error

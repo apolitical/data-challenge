@@ -129,7 +129,8 @@ sketch, anything else you thought was worth raising. Any number of files, any fo
 no structure required.
 
 **Send it back as a zip** — the folder, minus `.venv/` and `mock_data.duckdb` — by
-email, by the end of the day after you start.
+email, by the end of the day after you start. **Keep `.git/`** if you committed as you
+went; it is a few megabytes and it saves you explaining the order you did things in.
 
 ## What counts as finished
 
