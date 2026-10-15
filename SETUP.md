@@ -227,11 +227,21 @@ Three things to know:
 
 - **Stop it before `dbt build`.** DuckDB gives the database file to one process at a
   time, so leaving it open makes dbt fail with `Could not set lock on file`.
-- **It needs a network connection.** The first run downloads a DuckDB extension
-  (~30MB), and the UI serves its front-end from DuckDB's own site. This is the one
-  thing in the repository that talks to the internet, and it is a convenience, not part
-  of the exercise -- every query still runs locally against your file, and no data
-  leaves your machine. Nothing in the pipeline itself reaches anything remote.
+- **It needs a network connection, every time.** The first run downloads a DuckDB
+  extension (~30MB), and the UI fetches its front-end from DuckDB's own site on every
+  load. Offline you get this, in the browser:
+
+  ```
+  Could not fetch: '/' from 'https://ui.duckdb.org': Could not establish connection
+  ```
+
+  That is the UI, not the exercise. Query from the command line instead --
+  [`DUCKDB_REFERENCE.md`](DUCKDB_REFERENCE.md) shows how.
+
+  This is the one thing in the repository that talks to the internet, and it is a
+  convenience rather than part of the exercise: every query still runs locally against
+  your file, and no data leaves your machine. Nothing in the pipeline itself reaches
+  anything remote.
 - `--port 4300` if something already holds the default port, `--no-browser` to start
   the server without opening one.
 

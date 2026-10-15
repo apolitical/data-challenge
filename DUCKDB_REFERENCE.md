@@ -34,9 +34,11 @@ run SQL. Tables carry the database name in front:
 select * from mock_data.analytics.marts_engagement__member_tiers limit 10;
 ```
 
-The UI downloads a DuckDB extension (~30MB) the first time and serves its front-end from
-DuckDB's own site, so it needs a network connection. Your data never leaves the machine;
-every query runs locally against your file. Stop it before you run `dbt build`.
+The UI downloads a DuckDB extension (~30MB) the first time, and fetches its front-end
+from DuckDB's own site on every load, so it needs a network connection each time you use
+it. Offline, the browser shows `Could not fetch: '/' from 'https://ui.duckdb.org'` -- use
+the command line above instead. Your data never leaves the machine; every query runs
+locally against your file. Stop the UI before you run `dbt build`.
 
 ## Lists
 
