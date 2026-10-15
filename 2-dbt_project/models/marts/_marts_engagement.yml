@@ -1,0 +1,49 @@
+version: 2
+
+models:
+
+  - name: marts_engagement__member_tiers
+    description: >
+      The engagement tier the sync pushes to the CRM for each member, rebuilt daily by the
+      sync-member-engagement DAG. Marketing automation is driven off the tier the CRM holds.
+    columns:
+
+      - name: member_id
+        description: "Member identifier."
+        tests:
+          - not_null:
+              tags: ['critical']
+
+      - name: source_system
+        description: "The engagement platform the member's activity comes from."
+
+      - name: email
+        description: "The member's email address."
+
+      - name: country
+        description: "Two-letter country code."
+
+      - name: engagement_score
+        description: "Events attributed to the member in the recent window."
+
+      - name: engagement_tier
+        description: "The member's engagement tier: champion, engaged, at_risk or dormant."
+        tests:
+          - accepted_values:
+              values: ['champion', 'engaged', 'at_risk', 'dormant']
+              tags: ['critical']
+
+      - name: previous_tier
+        description: "The tier the CRM held before this run, used to build the timeline note."
+
+      - name: tier_changed
+        description: "Whether this run moves the member to a different tier."
+
+      - name: latest_snapshot_date
+        description: "The most recent upstream snapshot contributing to the member's score."
+
+      - name: last_synced_at
+        description: "When the sync last wrote to the member in the CRM."
+
+      - name: run_date
+        description: "The logical run date the model was built for."

@@ -1,37 +1,38 @@
-# Apolitical Data Challenge
+# Apolitical Senior Data Engineer challenge
 
-This repository contains technical challenges for data roles at Apolitical.
+A member engagement pipeline that has already had an incident. The exercise is to make
+it safe to run.
 
-## Challenges
+**Start with [`SENIOR_DATA_ENGINEER.md`](SENIOR_DATA_ENGINEER.md).** Then
+[`SETUP.md`](SETUP.md) to get it running.
 
-| Challenge | Target Role | Branch | Time |
-|-----------|-------------|--------|------|
-| [Data Lead](../../tree/data-lead) | Data Lead / Senior Data Engineer | `data-lead` | ~1.5–2 hours |
-| [Analytics Engineer](../../tree/analytics-engineer) | Analytics Engineer | `analytics-engineer` | ~1-1.5 hours |
+## What this is
 
-## Quick Start
+| | |
+|---|---|
+| Warehouse | DuckDB, local file, no server |
+| Transformation | dbt Core |
+| Orchestration | Airflow 2.11, local |
+| CRM | a local mock with a documented API contract |
+| Python | 3.11 or 3.12 |
+| Package manager | `uv` |
 
-You should have received instructions on which challenge to complete.
-See the challenge instructions in the appropriate branch:
+No Docker, no cloud credentials. Both CRM environments are local mocks with dummy
+credentials — **nothing in the pipeline can reach a real service.**
 
-- [Data Lead → `DATA_LEAD.md`](../../tree/data-lead/DATA_LEAD.md)
-- [Analytics Engineer → `ANALYTICS_ENGINEER.md`](../../tree/analytics-engineer/ANALYTICS_ENGINEER.md)
+## Layout
 
-To get started, clone the branch:
-
-```bash
-git clone -b <branch-name> <repo-url>
 ```
-
-## Shared Infrastructure
-
-Both challenges use:
-- **DuckDB** as the local database engine
-- **dbt** for data modeling
-- **uv** as the Python package manager
-- Raw data in `mock_data/` loaded via `scripts/init_db.py`
-
-## Branch Policy
-
-Challenge branches (`data-lead`, `analytics-engineer`) must **not** be merged into `main`.
-Each branch is self-contained with its own README, setup instructions, and task definitions.
+SENIOR_DATA_ENGINEER.md   the exercise
+SETUP.md                  how to run everything
+MIGRATION_MANIFEST.md     status of the upstream engagement feed migration
+DUCKDB_REFERENCE.md       DuckDB syntax you may not have used before
+default.env               local environment; copy to .env and edit
+2-dbt_project/            models, tests, dbt profile
+3-airflow/dags/           the sync-member-engagement pipeline and its CRM client
+3-airflow/utilities/      shared helpers: runtime, pipeline config, failure alerting
+mock_crm/                 the mock CRM, its API contract and its state
+mock_data/                committed fixtures
+scripts/                  warehouse loading, incident replay, reset, standalone sync,
+                          data exploration
+```

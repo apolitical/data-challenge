@@ -1,0 +1,21 @@
+name: 'apolitical_engagement'
+version: '1.0.0'
+config-version: 2
+
+profile: 'apolitical_engagement'
+
+model-paths: ['models']
+test-paths: ['tests']
+
+vars:
+  # The pipeline's logical run date. Every date-dependent expression in the project
+  # reads this rather than the current date, so a model built today produces the same
+  # result as one built on the incident date. Airflow passes the DAG run's own date.
+  run_date: '2026-09-15'
+
+models:
+  apolitical_engagement:
+    base:
+      +materialized: view
+    marts:
+      +materialized: table
