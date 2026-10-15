@@ -9,8 +9,34 @@ DuckDB is broadly PostgreSQL-compatible; this covers the rest.
 uv run python -c "import duckdb; c = duckdb.connect('mock_data.duckdb', read_only=True); print(c.execute('show tables').fetchall())"
 ```
 
-Read-only is worth using for exploration: DuckDB allows **one writer at a time**, so an
-open write connection will make `dbt` fail to take the lock.
+Read-only is worth using for exploration: it means nothing you run by hand can change
+the warehouse.
+
+It does **not** let you explore while `dbt` is building. DuckDB hands the database file
+to one process at a time, and a reader blocks a writer just as a writer does, so an open
+connection of either kind makes `dbt` fail with `Could not set lock on file`. That error
+reads like the project is broken; usually it means something is still open in another
+window. Close it and build again.
+
+## A browser UI
+
+For anything more than a one-liner, DuckDB's own query UI is easier than composing
+`python -c` each time:
+
+```bash
+uv run python scripts/explore.py
+```
+
+It opens a browser, attaches the warehouse read-only and lets you browse the schemas and
+run SQL. Tables carry the database name in front:
+
+```sql
+select * from mock_data.analytics.marts_engagement__member_tiers limit 10;
+```
+
+The UI downloads a DuckDB extension (~30MB) the first time and serves its front-end from
+DuckDB's own site, so it needs a network connection. Your data never leaves the machine;
+every query runs locally against your file. Stop it before you run `dbt build`.
 
 ## Lists
 

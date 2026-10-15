@@ -5,8 +5,8 @@ human rather than only the task log.
 
 **This copy writes to the local log and nowhere else.** In the real deployment the
 callback posts to Slack; here there is no outbound request of any kind, no webhook to
-configure, and no way for a failure alert to leave this machine. Nothing in this
-repository can reach an external service.
+configure, and no way for a failure alert to leave this machine. Nothing in the
+pipeline can reach an external service.
 """
 
 import logging

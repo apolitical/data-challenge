@@ -17,8 +17,8 @@ it safe to run.
 | Python | 3.11 or 3.12 |
 | Package manager | `uv` |
 
-No Docker, no cloud credentials, no external services. Both CRM environments are local
-mocks with dummy credentials — **nothing here can reach a real service.**
+No Docker, no cloud credentials. Both CRM environments are local mocks with dummy
+credentials — **nothing in the pipeline can reach a real service.**
 
 ## Layout
 
@@ -33,5 +33,6 @@ default.env               local environment; copy to .env and edit
 3-airflow/utilities/      shared helpers: runtime, pipeline config, failure alerting
 mock_crm/                 the mock CRM, its API contract and its state
 mock_data/                committed fixtures
-scripts/                  warehouse loading, incident replay, reset, standalone sync
+scripts/                  warehouse loading, incident replay, reset, standalone sync,
+                          data exploration
 ```

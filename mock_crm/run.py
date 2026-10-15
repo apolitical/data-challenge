@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Start a mock CRM environment.
 
-Two environments exist, both local mocks with dummy credentials. Nothing in this
-repository can reach a real service.
+Two environments exist, both local mocks with dummy credentials. Nothing in the
+pipeline can reach a real service.
 
     development  port 8010, state in mock_crm/state/development.json
     production   port 8020, state in mock_crm/state/production.json

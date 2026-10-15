@@ -204,6 +204,40 @@ forked log-server processes:
 
 For the auto-load to work, `PYTHONPATH` must include `3-airflow/`.
 
+## Looking at the data
+
+DuckDB ships a query UI. This starts it against the warehouse:
+
+```bash
+uv run python scripts/explore.py
+```
+
+It opens a browser, and you can browse both schemas and run SQL there -- `raw` is what
+the pipeline ingests, `analytics` is what dbt builds. The warehouse is attached
+read-only, so nothing you run here can change it, and tables carry the database name in
+front:
+
+```sql
+select engagement_tier, count(*)
+from mock_data.analytics.marts_engagement__member_tiers
+group by 1 order by 2 desc;
+```
+
+Three things to know:
+
+- **Stop it before `dbt build`.** DuckDB gives the database file to one process at a
+  time, so leaving it open makes dbt fail with `Could not set lock on file`.
+- **It needs a network connection.** The first run downloads a DuckDB extension
+  (~30MB), and the UI serves its front-end from DuckDB's own site. This is the one
+  thing in the repository that talks to the internet, and it is a convenience, not part
+  of the exercise -- every query still runs locally against your file, and no data
+  leaves your machine. Nothing in the pipeline itself reaches anything remote.
+- `--port 4300` if something already holds the default port, `--no-browser` to start
+  the server without opening one.
+
+If you would rather not use it, everything is reachable from the command line -- see
+[`DUCKDB_REFERENCE.md`](DUCKDB_REFERENCE.md).
+
 ## Useful commands
 
 ```bash
