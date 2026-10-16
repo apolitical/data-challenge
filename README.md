@@ -28,9 +28,9 @@ SETUP.md                  how to run everything
 MIGRATION_MANIFEST.md     status of the upstream engagement feed migration
 DUCKDB_REFERENCE.md       DuckDB syntax you may not have used before
 default.env               local environment; copy to .env and edit
-2-dbt_project/            models, tests, dbt profile
-3-airflow/dags/           the sync-member-engagement pipeline and its CRM client
-3-airflow/utilities/      shared helpers: runtime, pipeline config, failure alerting
+dbt/                      models, tests, dbt profile
+airflow/dags/             the sync-member-engagement pipeline and its CRM client
+airflow/utilities/        shared helpers: runtime, pipeline config, failure alerting
 mock_crm/                 the mock CRM, its API contract and its state
 mock_data/                committed fixtures
 scripts/                  warehouse loading, incident replay, reset, standalone sync,

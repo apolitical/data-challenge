@@ -38,7 +38,7 @@ from mock_crm.service import CrmStore  # noqa: E402
 ROOT = Path(__file__).parent.parent
 DATA_DIR = ROOT / "mock_data"
 DB_FILE = ROOT / "mock_data.duckdb"
-DBT_DIR = ROOT / "2-dbt_project"
+DBT_DIR = ROOT / "dbt"
 
 ENVIRONMENT = "production"
 # The port the replay's own CRM listens on. Rebound by --port, because SETUP tells
@@ -159,7 +159,7 @@ def build_models(run_date):
 
 def push_tiers(run_date):
     """Push every member's tier to the CRM, as the DAG's sync task does."""
-    sys.path.insert(0, str(ROOT / "3-airflow" / "dags" / "sync_member_engagement"))
+    sys.path.insert(0, str(ROOT / "airflow" / "dags" / "sync_member_engagement"))
     from crm_client import CrmClient, sync_engagement_tiers
 
     conn = duckdb.connect(str(DB_FILE), read_only=True)

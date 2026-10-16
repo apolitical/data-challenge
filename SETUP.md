@@ -18,7 +18,7 @@ Each step below assumes the ones above it.
 |---|---|---|---|
 | 1 | install dependencies | `uv sync` | seconds to a minute |
 | 2 | load the fixtures into DuckDB | `uv run python scripts/init_db.py` | ~7s |
-| 3 | build the models | `cd 2-dbt_project && export DBT_PROFILES_DIR=$(pwd) && uv run dbt build` | ~5s |
+| 3 | build the models | `cd dbt && export DBT_PROFILES_DIR=$(pwd) && uv run dbt build` | ~5s |
 | 4 | create your environment file | `cd .. && cp default.env .env` | — |
 | 5 | start a mock CRM | `uv run python -m mock_crm.run --environment production` | leave it running |
 | 6 | run the sync into it | `uv run --env-file .env python scripts/run_sync.py` | ~20s |
@@ -57,11 +57,11 @@ That creates `mock_data.duckdb` and loads the fixtures from `mock_data/`. You sh
 four tables loaded: `raw.members`, `raw.events`, `raw.member_activity` and
 `raw.crm_member_state`.
 
-Then build the models. dbt commands run from `2-dbt_project/`; everything else in
+Then build the models. dbt commands run from `dbt/`; everything else in
 this file runs from the repository root, so come back afterwards:
 
 ```bash
-cd 2-dbt_project
+cd dbt
 export DBT_PROFILES_DIR=$(pwd)
 uv run dbt build
 cd ..
@@ -194,7 +194,7 @@ cp default.env .env
 ```
 
 Edit `.env` and set `AIRFLOW_HOME` and `PYTHONPATH` to the absolute path of this
-repository's `3-airflow` directory. Then:
+repository's `airflow` directory. Then:
 
 ```bash
 uv run --env-file .env airflow standalone
@@ -218,10 +218,10 @@ kill <PID>
 On macOS this repository includes a workaround for a known Airflow standalone crash in
 forked log-server processes:
 
-- `3-airflow/sitecustomize.py` — auto-loaded by Python at startup
-- `3-airflow/airflow_macos_standalone_workaround.py` — the patch itself
+- `airflow/sitecustomize.py` — auto-loaded by Python at startup
+- `airflow/airflow_macos_standalone_workaround.py` — the patch itself
 
-For the auto-load to work, `PYTHONPATH` must include `3-airflow/`.
+For the auto-load to work, `PYTHONPATH` must include `airflow/`.
 
 ## Looking at the data
 

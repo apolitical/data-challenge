@@ -29,7 +29,7 @@ import duckdb
 
 ROOT = Path(__file__).parent.parent
 DB_FILE = ROOT / "mock_data.duckdb"
-sys.path.insert(0, str(ROOT / "3-airflow" / "dags" / "sync_member_engagement"))
+sys.path.insert(0, str(ROOT / "airflow" / "dags" / "sync_member_engagement"))
 
 
 def main():

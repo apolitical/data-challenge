@@ -17,7 +17,7 @@ What it restores:
 
 It does not rebuild the dbt models. Do that afterwards:
 
-    cd 2-dbt_project && export DBT_PROFILES_DIR=$(pwd) && uv run dbt build
+    cd dbt && export DBT_PROFILES_DIR=$(pwd) && uv run dbt build
 
 Run: uv run python scripts/reset_state.py
 """
@@ -31,7 +31,7 @@ ROOT = Path(__file__).parent.parent
 DATA_DIR = ROOT / "mock_data"
 STATE_DIR = ROOT / "mock_crm" / "state"
 DELIVERED = ROOT / ".delivered"
-DBT_TARGET = ROOT / "2-dbt_project" / "target"
+DBT_TARGET = ROOT / "dbt" / "target"
 
 
 def main():
@@ -86,7 +86,7 @@ def main():
         print("   cleared the dbt target directory")
 
     print("\nDone. Rebuild the models when you are ready:")
-    print("   cd 2-dbt_project && export DBT_PROFILES_DIR=$(pwd) && uv run dbt build")
+    print("   cd dbt && export DBT_PROFILES_DIR=$(pwd) && uv run dbt build")
     return 0
 
 
