@@ -72,7 +72,7 @@ instead of the current date. It defaults to today, so to build the models as the
 on any past run date:
 
 ```bash
-uv run dbt build --vars '{"run_date": "2026-09-11"}'
+uv run dbt build --vars '{"run_date": "2026-09-25"}'
 ```
 
 **What you should see**, so you can tell our problems from your own. These are for a
@@ -170,7 +170,7 @@ has the command that restores it.
 ## Replaying the incident, and putting it back
 
 ```bash
-uv run python scripts/run_incident.py    # replay 2026-09-11 to 2026-09-14
+uv run python scripts/run_incident.py    # replay 2026-09-25 to 2026-09-28
 uv run python scripts/reset_state.py     # back to the pre-incident starting state
 ```
 
@@ -278,7 +278,7 @@ uv run python -c "import duckdb; print(duckdb.connect('mock_data.duckdb', read_o
 # "You need to initialize the database". `dags test` runs the real sync, so start the
 # CRM environment your .env points at first.
 uv run --env-file .env airflow dags list
-uv run --env-file .env airflow dags test sync-member-engagement 2026-09-15
+uv run --env-file .env airflow dags test sync-member-engagement 2026-09-29
 
 # the mock CRM's tests
 uv run pytest mock_crm -q

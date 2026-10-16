@@ -55,7 +55,7 @@ sources:
         description: >
           The authoritative event log for the recent window, one row per event. The engagement
           model does not read this table; other pipelines do. As delivered it is the log as it
-          stood for the 2026-09-15 run: complete to the end of 2026-09-14.
+          stood for the 2026-09-29 run: complete to the end of 2026-09-28.
         columns:
           - name: event_id
             description: "Event identifier."

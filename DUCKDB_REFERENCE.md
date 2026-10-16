@@ -74,7 +74,7 @@ count(*) filter (where condition)     -- a conditional count, without a case exp
 ## Dates
 
 ```sql
-cast('2026-09-11' as date)
+cast('2026-09-25' as date)
 current_date - 7                      -- integer arithmetic on dates gives days
 date_trunc('week', event_timestamp)
 ```
@@ -93,5 +93,5 @@ The project takes a `run_date` variable, which every date-dependent expression r
 instead of the current date:
 
 ```bash
-uv run dbt build --vars '{"run_date": "2026-09-11"}'
+uv run dbt build --vars '{"run_date": "2026-09-25"}'
 ```

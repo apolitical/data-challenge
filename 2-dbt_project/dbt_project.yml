@@ -11,7 +11,7 @@ vars:
   # The pipeline's logical run date. Every date-dependent expression in the project
   # reads this rather than the current date, so a model built today produces the same
   # result as one built on the incident date. Airflow passes the DAG run's own date.
-  run_date: '2026-09-15'
+  run_date: '2026-09-29'
 
 models:
   apolitical_engagement:

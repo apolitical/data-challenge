@@ -56,25 +56,25 @@ everything back (`scripts/reset_state.py`), as many times as you like.
 
 ## The incident
 
-> **2026-09-11.** The daily `sync-member-engagement` pipeline pushed engagement tiers
+> **2026-09-25.** The daily `sync-member-engagement` pipeline pushed engagement tiers
 > from the warehouse into the CRM, as it does every morning at 02:00.
 >
 > That run moved **708 of our ~12,000 members into the `dormant` tier**. Marketing's
 > automation fires on the *transition into* `dormant`, so every one of them was sent the
 > re-engagement email — the "we miss you, here's what you've missed" one.
 >
-> Nobody noticed. The pipeline ran again on the 12th, the 13th and the 14th, and
-> **every run reported success.** By the 14th the automation had sent **732** of those
+> Nobody noticed. The pipeline ran again on the 26th, the 27th and the 28th, and
+> **every run reported success.** By the 28th the automation had sent **732** of those
 > emails in total.
 >
-> On the 14th a member replied to the email to say they had been using the platform
+> On the 28th a member replied to the email to say they had been using the platform
 > that week, and please stop telling them they had gone quiet. That is how we found out
 > — three days and 732 emails later.
 >
 > Marketing have asked us one thing: **do we need to do something about the people who
 > got that email, or will it sort itself out once the pipeline is fixed?**
 
-Today is **2026-09-15**. Nothing has been paused, and today's run has not gone yet —
+Today is **2026-09-29**. Nothing has been paused, and today's run has not gone yet —
 it is the one you would be making.
 
 ---

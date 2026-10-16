@@ -1,7 +1,7 @@
 # Engagement feed migration manifest
 
 Status of the migration from the legacy engagement platform to `engagement_v2`.
-Maintained by the platform team. Last updated 2026-09-10.
+Maintained by the platform team. Last updated 2026-09-24.
 
 ## Which source system a member is on
 
@@ -27,19 +27,19 @@ measure of recent activity and must not be treated as one.
 
 ## What an empty `recent_event_ids` means
 
-This changed on **2026-09-11**, and **only for `engagement_v2`** — migration step 4,
+This changed on **2026-09-25**, and **only for `engagement_v2`** — migration step 4,
 normalising empty collections. The legacy feed is unaffected: it has never populated
 this column and still sends nothing for it, so a null from a `legacy_feed` member means
 what it always did.
 
 For a member on `engagement_v2`:
 
-| Value | Before 2026-09-11 | From 2026-09-11 |
+| Value | Before 2026-09-25 | From 2026-09-25 |
 |---|---|---|
 | column absent / null | the member had no recent events | the v2 feed no longer sends this |
 | empty list | not sent | the member had no recent events **or** the column is not populated for their source path |
 
-**So from 2026-09-11 an empty list from `engagement_v2` is ambiguous.** Step 4 was
+**So from 2026-09-25 an empty list from `engagement_v2` is ambiguous.** Step 4 was
 applied to the delivery format before step 5, which restores population for the
 remaining source paths; step 5 is not yet scheduled. Until it lands, an empty list from
 that feed cannot be read as "this member had no activity" on its own.

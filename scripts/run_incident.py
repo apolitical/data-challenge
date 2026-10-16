@@ -4,11 +4,11 @@
 This is what makes the incident something the candidate can observe rather than
 something the brief asserts. It reproduces, in the CRM's own state:
 
-  2026-09-10  the last good run, seeded from the committed fixture
-  2026-09-11  the run where the upstream migration lands and tiers go wrong
-  2026-09-12  a run that reports success
-  2026-09-13  a run that reports success
-  2026-09-14  a run that reports success -- the day a member complains
+  2026-09-24  the last good run, seeded from the committed fixture
+  2026-09-25  the run where the upstream migration lands and tiers go wrong
+  2026-09-26  a run that reports success
+  2026-09-27  a run that reports success
+  2026-09-28  a run that reports success -- the day a member complains
 
 Each replayed run does what the DAG does: ingest the CRM's current state back into the
 warehouse, rebuild the models for that run date, and push every member's tier to the
@@ -50,7 +50,7 @@ BASE_URL = f"http://127.0.0.1:{PORT}"
 def seed_crm_from_fixture():
     """Load the CRM's pre-incident state straight into its store.
 
-    Seeded directly rather than replayed: 2026-09-10 is where the history starts, not
+    Seeded directly rather than replayed: 2026-09-24 is where the history starts, not
     something this script reproduces.
     """
     store = CrmStore(STATE_DIR / f"{ENVIRONMENT}.json")
