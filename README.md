@@ -17,7 +17,7 @@ it safe to run.
 | Python | 3.11 or 3.12 |
 | Package manager | `uv` |
 
-No Docker, no cloud credentials. Both CRM environments are local mocks with dummy
+No Docker, no cloud credentials. The CRM is a local mock with dummy
 credentials — **nothing in the pipeline can reach a real service.**
 
 ## Layout
@@ -33,6 +33,6 @@ airflow/dags/             the sync-member-engagement pipeline and its CRM client
 airflow/utilities/        shared helpers: runtime, pipeline config, failure alerting
 mock_crm/                 the mock CRM, its API contract and its state
 mock_data/                committed fixtures
-scripts/                  warehouse loading, incident replay, reset, standalone sync,
-                          data exploration
+scripts/                  warehouse loading, the pipeline run without Airflow, incident
+                          replay, reset, data exploration
 ```

@@ -46,9 +46,9 @@ def main():
     # The CRM's state. Replaced wholesale, and the write-ahead journal is discarded:
     # replaying a journal on top of a restored snapshot would reapply the very changes
     # this is undoing.
-    # Only what we can put back: an environment the candidate created themselves (a
-    # second CRM on `--environment development`, say) has nothing to restore from, so
-    # deleting it here would be a one-way door in a script that promises the opposite.
+    # Only what we can put back: a state file the candidate created themselves has
+    # nothing to restore from, so deleting it here would be a one-way door in a script
+    # that promises the opposite.
     restorable = {source.name for source in (DELIVERED / "mock_crm_state").glob("*.json")}
     for stale in STATE_DIR.glob("*"):
         if stale.name in restorable or stale.suffix != ".json":

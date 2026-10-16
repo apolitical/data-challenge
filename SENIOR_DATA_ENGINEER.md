@@ -38,15 +38,15 @@ and the one that matters below is `dormant`.
 |---|---|
 | `dbt/` | the dbt models that produce member engagement tiers |
 | `airflow/dags/` | the `sync-member-engagement` pipeline and its CRM client |
-| `mock_crm/` | a local mock of the CRM — two environments, `development` and `production` — and its API contract |
+| `mock_crm/` | a local mock of the production CRM, and its API contract |
 | `mock_data/` | the committed fixtures, including one input snapshot per run date |
-| `scripts/` | warehouse loading, incident replay, reset, a standalone sync, and a query UI for the warehouse (`explore.py`) |
+| `scripts/` | warehouse loading, the pipeline run without Airflow (`run_pipeline.py`), incident replay, reset, and a query UI for the warehouse (`explore.py`) |
 | `MIGRATION_MANIFEST.md` | status of the upstream engagement feed migration |
 
 **Where this runs.** In production this is Airflow on a schedule. Here it is all local:
-DuckDB for the warehouse, and two mock CRMs. There are no cloud credentials, nothing to
-spend, and **nothing in the pipeline can reach a real service** — both CRM
-environments are local mocks.
+DuckDB for the warehouse, and a mock of the production CRM. There are no cloud
+credentials, nothing to spend, and **nothing in the pipeline can reach a real service** —
+the CRM is a local mock.
 
 The models take a `run_date`, so you can build them as they stood on any past run date;
 `SETUP.md` shows how. You can replay the incident (`scripts/run_incident.py`) and put

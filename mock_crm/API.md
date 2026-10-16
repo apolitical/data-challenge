@@ -3,22 +3,17 @@
 A local stand-in for the CRM the engagement pipeline writes to. It persists to a JSON
 file so state survives between pipeline runs.
 
-Two environments, **both local mocks with dummy credentials**:
-
-| Environment | Base URL | State file |
-|---|---|---|
-| development | `http://127.0.0.1:8010` | `mock_crm/state/development.json` |
-| production | `http://127.0.0.1:8020` | `mock_crm/state/production.json` |
-
-Start one with:
+It stands in for the **production** CRM, and is a **local mock with dummy credentials**:
+`http://127.0.0.1:8020`, state in `mock_crm/state/production.json`.
+`scripts/run_pipeline.py` and `scripts/run_incident.py` start it themselves. To start it
+by hand:
 
 ```bash
-uv run python -m mock_crm.run --environment development
+uv run python -m mock_crm.run
 ```
 
-The state file is chosen by `--environment`, not by the port, so run **at most one
-instance of a given environment at a time** -- two `--environment production` processes
-share `production.json` and overwrite each other's writes even on different ports.
+Run **at most one at a time**: two processes share `production.json` and overwrite each
+other's writes, even on different ports.
 
 ## Is it running?
 

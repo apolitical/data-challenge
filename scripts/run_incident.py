@@ -32,7 +32,7 @@ import requests
 sys.path.insert(0, str(Path(__file__).parent))
 sys.path.insert(0, str(Path(__file__).parent.parent))
 import pipeline_config as C  # noqa: E402
-from mock_crm.run import ENVIRONMENTS, STATE_DIR  # noqa: E402
+from mock_crm.run import PORT, STATE_FILE, is_listening, start_in_background  # noqa: E402
 from mock_crm.service import CrmStore  # noqa: E402
 
 ROOT = Path(__file__).parent.parent
@@ -40,10 +40,8 @@ DATA_DIR = ROOT / "mock_data"
 DB_FILE = ROOT / "mock_data.duckdb"
 DBT_DIR = ROOT / "dbt"
 
-ENVIRONMENT = "production"
-# The port the replay's own CRM listens on. Rebound by --port, because SETUP tells
-# candidates to start a CRM themselves and something else may already hold the default.
-PORT = ENVIRONMENTS[ENVIRONMENT]
+# The replay's own CRM listens on mock_crm.run's PORT (imported above). Rebound by --port,
+# in case something outside this exercise already holds the default.
 BASE_URL = f"http://127.0.0.1:{PORT}"
 
 
@@ -53,7 +51,7 @@ def seed_crm_from_fixture():
     Seeded directly rather than replayed: 2026-09-24 is where the history starts, not
     something this script reproduces.
     """
-    store = CrmStore(STATE_DIR / f"{ENVIRONMENT}.json")
+    store = CrmStore(STATE_FILE)
     store._state = {"members": {}, "emails": [], "transitions": [], "runs": []}
     fixture = DATA_DIR / f"crm_member_state_{C.PRE_INCIDENT_DATE}.csv"
     with fixture.open() as fh:
@@ -67,18 +65,15 @@ def seed_crm_from_fixture():
     print(f"   seeded {len(store._state['members']):,} members from {fixture.name}")
 
 
-def start_crm():
-    """Start the production mock CRM and wait for *our* process to answer.
+def refuse_if_crm_running():
+    """Stop before touching anything if a CRM is already listening on the replay's port.
 
-    Refuses to run if something is already listening. SETUP tells candidates to start
-    the CRM themselves, so an already-running service is likely -- and attaching to it
-    would replay the incident into whatever state that service happens to hold, silently.
+    The replay seeds the CRM's state file and then starts its own CRM on it. A CRM
+    already running holds that file too, so the two would overwrite each other's
+    writes; and attaching to it would replay the incident into whatever state it
+    happens to hold, silently. So check first, before the seed rewrites the file.
     """
-    try:
-        requests.get(f"{BASE_URL}/v1/sync/runs", timeout=1)
-    except requests.RequestException:
-        pass
-    else:
+    if is_listening(PORT):
         raise SystemExit(
             f"Something is already listening on {BASE_URL}.\n"
             "This script starts its own CRM and needs that port to itself, so that the\n"
@@ -86,26 +81,6 @@ def start_crm():
             f"    lsof -i :{PORT}\n"
             "Or run this script against another port with --port."
         )
-
-    process = subprocess.Popen(
-        [sys.executable, "-m", "mock_crm.run", "--environment", ENVIRONMENT,
-         "--port", str(PORT)],
-        cwd=ROOT,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
-    for _ in range(50):
-        if process.poll() is not None:
-            raise RuntimeError(
-                f"the mock CRM exited immediately with status {process.returncode}"
-            )
-        try:
-            requests.get(f"{BASE_URL}/v1/sync/runs", timeout=1)
-            return process
-        except requests.RequestException:
-            time.sleep(0.2)
-    process.terminate()
-    raise RuntimeError(f"mock CRM did not start on {BASE_URL}")
 
 
 def export_crm_state(run_date):
@@ -198,11 +173,13 @@ def main():
     PORT = args.port
     BASE_URL = f"http://127.0.0.1:{PORT}"
 
+    refuse_if_crm_running()
+
     print("Replaying the pipeline's run history\n")
     print(f"[{C.PRE_INCIDENT_DATE}] last good run")
     seed_crm_from_fixture()
 
-    crm = start_crm()
+    crm = start_in_background(PORT)
     try:
         for run_date in C.REPLAYED_DATES:
             started = time.time()

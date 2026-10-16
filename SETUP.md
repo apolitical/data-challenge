@@ -19,18 +19,16 @@ Each step below assumes the ones above it.
 | 1 | install dependencies | `uv sync` | seconds to a minute |
 | 2 | load the fixtures into DuckDB | `uv run python scripts/init_db.py` | ~7s |
 | 3 | build the models | `cd dbt && export DBT_PROFILES_DIR=$(pwd) && uv run dbt build` | ~5s |
-| 4 | create your environment file | `cd .. && cp default.env .env` | — |
-| 5 | start a mock CRM | `uv run python -m mock_crm.run --environment production` | leave it running |
-| 6 | run the sync into it | `uv run --env-file .env python scripts/run_sync.py` | ~20s |
+| 4 | run the pipeline | `cd .. && uv run python scripts/run_pipeline.py` | ~20s |
 
-That is everything needed to run the pipeline. Airflow is **optional** — step 6 exercises
-the same sync task the DAG runs. If you do want the DAG, see *Running the DAG*; you only
-need to edit `.env` for that.
+That is everything needed to run the pipeline. Step 4 runs the DAG's three tasks without
+Airflow, and starts the mock CRM it writes to. Airflow is **optional**; if you do want the
+DAG, see *Running the DAG*.
 
-Step 6 writes every member's current tier into the production CRM, overwriting what it
+Step 4 writes every member's current tier into the production CRM, overwriting what it
 holds now, including the record of what happened during the incident. That is reversible:
 `uv run python scripts/reset_state.py` puts it back. If you want to see the CRM as the
-incident left it, look before you run step 6, or reset afterwards.
+incident left it, look before you run step 4, or reset afterwards.
 
 ## Supported environment
 
@@ -116,56 +114,45 @@ conn.close()
 Read-only is still worth using: it guarantees your exploration cannot change anything.
 It just does not remove the need to disconnect.
 
-## Running the mock CRM
-
-Two environments, both local mocks with dummy credentials:
+## Running the pipeline
 
 ```bash
-uv run python -m mock_crm.run --environment development   # port 8010
-uv run python -m mock_crm.run --environment production    # port 8020
+uv run python scripts/run_pipeline.py                         # today, 2026-09-29
+uv run python scripts/run_pipeline.py --run-date 2026-09-25   # any run date
 ```
 
-To check one is up, and which environment it is, open its address or `curl` it --
-`http://127.0.0.1:8020/` lists the routes it serves and the state file it is writing to,
-and `/health` is a bare liveness check. Everything else is under `/v1`.
+It does what the DAG does, in the same order: `dbt run`, then `dbt test --select
+tag:critical`, then the sync, which reads the engagement mart and writes every member's
+tier to the CRM. A failed test stops it before the sync. It reads the same configuration
+as the DAG (`airflow/dags/sync_member_engagement/configs.yaml`).
 
-The API is documented in [`mock_crm/API.md`](mock_crm/API.md) — read that before writing
-against it, particularly the sections on idempotency, the rate limit and what triggers
-marketing automation.
+It writes to the production mock CRM on port 8020, starting it if nothing is listening
+there and stopping it afterwards. Running it overwrites the CRM's current state, including
+what it recorded during the incident.
+[*Replaying the incident, and putting it back*](#replaying-the-incident-and-putting-it-back)
+has the command that restores it.
 
-Each environment keeps its state in its own file (`mock_crm/state/<environment>.json`),
-and that file is chosen by `--environment`, **not** by the port. So run **at most one
-instance of a given environment at a time**: two processes started with
-`--environment production` share `production.json` and will overwrite each other's
-writes, even on different ports. If you need a second CRM alongside the first, use the
-other environment rather than a second port.
+## Running the mock CRM by hand
 
-If a port is already in use:
+The pipeline and the replay start their own, so you only need this to look at the API
+yourself. It is a local mock with dummy credentials:
 
 ```bash
-lsof -i :8010 -i :8020
+uv run python -m mock_crm.run     # port 8020, state in mock_crm/state/production.json
+```
+
+`http://127.0.0.1:8020/` lists the routes it serves and the state file it is writing to,
+and `/health` is a bare liveness check. Everything else is under `/v1`, documented in
+[`mock_crm/API.md`](mock_crm/API.md), including what triggers marketing automation.
+While it runs, `run_pipeline.py` uses it rather than starting another.
+
+Run **at most one at a time**: two share `production.json` and overwrite each other's
+writes, even on different ports. If the port is already in use:
+
+```bash
+lsof -i :8020
 kill <PID>
 ```
-
-`--port <n>` overrides the port if something outside this exercise already holds 8010 or
-8020. Remember to point `CRM_BASE_URL` in your `.env` at whatever port you chose.
-
-## Running the sync
-
-The sync reads the engagement mart and writes every member's tier to the CRM. To run it
-once without Airflow — start the CRM environment it points at first:
-
-```bash
-uv run --env-file .env python scripts/run_sync.py
-```
-
-It takes the CRM's address from the environment, the same way the DAG's task does, so it
-needs a `.env` — `cp default.env .env` is enough, and the copy works unedited for the
-sync. The absolute paths in that file matter only if you go on to run Airflow.
-
-Running it overwrites the CRM's current state, including what it recorded during the
-incident. [*Replaying the incident, and putting it back*](#replaying-the-incident-and-putting-it-back)
-has the command that restores it.
 
 ## Replaying the incident, and putting it back
 
@@ -174,9 +161,13 @@ uv run python scripts/run_incident.py    # replay 2026-09-25 to 2026-09-28
 uv run python scripts/reset_state.py     # back to the pre-incident starting state
 ```
 
-`run_incident.py` takes about a minute. It rebuilds the models for each run date and
+`run_incident.py` takes about two minutes. It rebuilds the models for each run date and
 pushes tiers to the production mock, so afterwards the CRM's state, its recorded tier
-transitions and the emails its automation sent are all there to inspect.
+transitions and the emails its automation sent are all there to inspect. It starts its
+own CRM, so stop any you started by hand first.
+
+Both scripts reload the warehouse from the fixtures, which leaves the models unbuilt:
+`dbt build` or `run_pipeline.py` builds them again.
 
 `reset_state.py` restores the CRM's state and the dated snapshots from an immutable
 copy that ships in `.delivered/`, then reloads the warehouse from the committed
@@ -186,8 +177,8 @@ repository into a state you can't get out of.
 
 ## Running the DAG
 
-Airflow is optional — `scripts/run_sync.py` exercises the sync without it. If you want
-the DAG itself:
+Airflow is optional — `scripts/run_pipeline.py` runs the same three tasks without it. If
+you want the DAG itself:
 
 ```bash
 cp default.env .env
@@ -205,8 +196,8 @@ webserver on port `8080` and the scheduler. The username is `admin`; the passwor
 written to `standalone_admin_password.txt` and printed in the terminal.
 
 Open `http://localhost:8080`, enable `sync-member-engagement`, and trigger a run. The
-sync task writes to whichever CRM `CRM_BASE_URL` points at, so **start that environment
-first** or the task will fail to connect.
+sync task writes to whichever CRM `CRM_BASE_URL` points at, so **start the CRM first**
+(`uv run python -m mock_crm.run`) or the task will fail to connect.
 
 Stop Airflow with `Ctrl+C`. If you restart and see `Address already in use`:
 
@@ -276,7 +267,7 @@ uv run python -c "import duckdb; print(duckdb.connect('mock_data.duckdb', read_o
 # the DAG, without the UI. Both need `airflow standalone` to have been run once --
 # that is what creates the Airflow metadata database; without it you get
 # "You need to initialize the database". `dags test` runs the real sync, so start the
-# CRM environment your .env points at first.
+# CRM your .env points at first.
 uv run --env-file .env airflow dags list
 uv run --env-file .env airflow dags test sync-member-engagement 2026-09-29
 
