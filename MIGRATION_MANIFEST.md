@@ -45,7 +45,8 @@ remaining source paths; step 5 is not yet scheduled. Until it lands, an empty li
 that feed cannot be read as "this member had no activity" on its own.
 
 `recent_event_ids` is a **window**, not a history: it contains the member's events from
-the last seven days, so the same member's list differs between snapshot dates.
+the seven days ending on the snapshot date, that date included, so the same member's list
+differs between snapshot dates.
 
 The authoritative record of member activity is `raw.events`, which is unaffected by the
 migration.

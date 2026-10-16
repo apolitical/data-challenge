@@ -19,7 +19,7 @@ Each step below assumes the ones above it.
 | 1 | install dependencies | `uv sync` | seconds to a minute |
 | 2 | load the fixtures into DuckDB | `uv run python scripts/init_db.py` | ~7s |
 | 3 | build the models | `cd 2-dbt_project && export DBT_PROFILES_DIR=$(pwd) && uv run dbt build` | ~5s |
-| 4 | create your environment file | `cp default.env .env` | — |
+| 4 | create your environment file | `cd .. && cp default.env .env` | — |
 | 5 | start a mock CRM | `uv run python -m mock_crm.run --environment production` | leave it running |
 | 6 | run the sync into it | `uv run --env-file .env python scripts/run_sync.py` | ~20s |
 

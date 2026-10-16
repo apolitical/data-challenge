@@ -47,13 +47,15 @@ sources:
               MIGRATION_MANIFEST.md documents what each one means.
           - name: legacy_event_count
             description: >
-              Lifetime event total carried over from the legacy platform. Only maintained for some
-              source systems -- see MIGRATION_MANIFEST.md.
+              The legacy platform's running count of the member's activity. Recalculated and re-sent
+              every run for legacy_feed members, so it can go down; frozen at migration for
+              engagement_v2 members -- see MIGRATION_MANIFEST.md.
 
       - name: events
         description: >
           The authoritative event log for the recent window, one row per event. The engagement
-          model does not read this table; other pipelines do.
+          model does not read this table; other pipelines do. As delivered it is the log as it
+          stood for the 2026-09-15 run: complete to the end of 2026-09-14.
         columns:
           - name: event_id
             description: "Event identifier."
