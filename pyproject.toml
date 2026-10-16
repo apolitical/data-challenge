@@ -4,7 +4,6 @@ version = "0.1.0"
 description = "Apolitical Senior Data Engineer technical test: an incident in a CRM sync pipeline"
 requires-python = ">=3.11,<3.13"
 dependencies = [
-    "apache-airflow==2.11.0",
     "dbt-core>=1.7.0",
     "dbt-duckdb>=1.7.0",
     "duckdb>=1.2.1,<2.0.0",
@@ -13,4 +12,11 @@ dependencies = [
     "pytest>=9.1.1",
     "requests>=2.31.0",
     "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+# Only needed to run the DAG under Airflow itself; scripts/run_pipeline.py runs the same
+# tasks without it. Install with: uv sync --extra airflow
+airflow = [
+    "apache-airflow==2.11.0",
 ]

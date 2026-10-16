@@ -177,10 +177,12 @@ repository into a state you can't get out of.
 
 ## Running the DAG
 
-Airflow is optional — `scripts/run_pipeline.py` runs the same three tasks without it. If
+Airflow is optional — `scripts/run_pipeline.py` runs the same three tasks without it. It
+is also not installed by default: it is an extra, about a hundred packages on its own. If
 you want the DAG itself:
 
 ```bash
+uv sync --extra airflow
 cp default.env .env
 ```
 

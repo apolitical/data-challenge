@@ -12,7 +12,7 @@ it safe to run.
 |---|---|
 | Warehouse | DuckDB, local file, no server |
 | Transformation | dbt Core |
-| Orchestration | Airflow 2.11, local |
+| Orchestration | Airflow 2.11, local and optional (`uv sync --extra airflow`) |
 | CRM | a local mock with a documented API contract |
 | Python | 3.11 or 3.12 |
 | Package manager | `uv` |
