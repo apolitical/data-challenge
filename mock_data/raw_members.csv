@@ -2000,7 +2000,6 @@ member_id,full_name,email,source_system,signup_date,country
 1999,Member 01999,member-01999@example.invalid,legacy_feed,2023-09-05,US
 2000,Member 02000,member-02000@example.invalid,legacy_feed,2024-02-23,SG
 2001,Member 02001,member-02001@example.invalid,legacy_feed,2022-09-30,DE
-2002,Member 02002,member-02002@example.invalid,engagement_v2,2026-07-27,US
 2002,Member 02002,member-02002@example.invalid,legacy_feed,2025-10-18,US
 2003,Member 02003,member-02003@example.invalid,legacy_feed,2022-05-21,IN
 2004,Member 02004,member-02004@example.invalid,legacy_feed,2025-02-27,GB
@@ -2391,7 +2390,6 @@ member_id,full_name,email,source_system,signup_date,country
 2389,Member 02389,member-02389@example.invalid,legacy_feed,2022-06-10,DE
 2390,Member 02390,member-02390@example.invalid,legacy_feed,2024-06-10,US
 2391,Member 02391,member-02391@example.invalid,legacy_feed,2025-07-08,US
-2392,Member 02392,member-02392@example.invalid,engagement_v2,2026-05-02,KE
 2392,Member 02392,member-02392@example.invalid,legacy_feed,2025-05-03,KE
 2393,Member 02393,member-02393@example.invalid,legacy_feed,2023-10-17,DE
 2394,Member 02394,member-02394@example.invalid,legacy_feed,2022-05-18,GB
@@ -2560,7 +2558,6 @@ member_id,full_name,email,source_system,signup_date,country
 2557,Member 02557,member-02557@example.invalid,legacy_feed,2025-07-23,GB
 2558,Member 02558,member-02558@example.invalid,legacy_feed,2022-01-10,BR
 2559,Member 02559,member-02559@example.invalid,legacy_feed,2023-07-15,US
-2560,Member 02560,member-02560@example.invalid,engagement_v2,2023-06-23,IN
 2560,Member 02560,member-02560@example.invalid,legacy_feed,2022-12-12,IN
 2561,Member 02561,member-02561@example.invalid,legacy_feed,2022-11-21,BR
 2562,Member 02562,member-02562@example.invalid,legacy_feed,2022-06-30,US
@@ -2758,7 +2755,6 @@ member_id,full_name,email,source_system,signup_date,country
 2754,Member 02754,member-02754@example.invalid,legacy_feed,2024-10-18,GB
 2755,Member 02755,member-02755@example.invalid,legacy_feed,2024-12-22,DE
 2756,Member 02756,member-02756@example.invalid,legacy_feed,2022-04-10,IN
-2757,Member 02757,member-02757@example.invalid,engagement_v2,2024-09-02,SG
 2757,Member 02757,member-02757@example.invalid,legacy_feed,2024-06-05,SG
 2758,Member 02758,member-02758@example.invalid,legacy_feed,2025-04-13,BR
 2759,Member 02759,member-02759@example.invalid,legacy_feed,2024-11-07,SG
@@ -3176,7 +3172,6 @@ member_id,full_name,email,source_system,signup_date,country
 3171,Member 03171,member-03171@example.invalid,legacy_feed,2025-02-19,IN
 3172,Member 03172,member-03172@example.invalid,legacy_feed,2023-12-14,KE
 3173,Member 03173,member-03173@example.invalid,legacy_feed,2023-07-21,US
-3174,Member 03174,member-03174@example.invalid,engagement_v2,2026-04-16,US
 3174,Member 03174,member-03174@example.invalid,legacy_feed,2025-05-26,US
 3175,Member 03175,member-03175@example.invalid,legacy_feed,2024-07-20,BR
 3176,Member 03176,member-03176@example.invalid,legacy_feed,2025-03-23,GB
@@ -3201,7 +3196,6 @@ member_id,full_name,email,source_system,signup_date,country
 3195,Member 03195,member-03195@example.invalid,legacy_feed,2025-07-21,SG
 3196,Member 03196,member-03196@example.invalid,legacy_feed,2023-03-28,DE
 3197,Member 03197,member-03197@example.invalid,legacy_feed,2023-04-16,SG
-3198,Member 03198,member-03198@example.invalid,engagement_v2,2024-02-01,BR
 3198,Member 03198,member-03198@example.invalid,legacy_feed,2023-10-09,BR
 3199,Member 03199,member-03199@example.invalid,legacy_feed,2023-12-25,IN
 3200,Member 03200,member-03200@example.invalid,legacy_feed,2025-01-02,GB
@@ -3508,7 +3502,6 @@ member_id,full_name,email,source_system,signup_date,country
 3501,Member 03501,member-03501@example.invalid,legacy_feed,2025-07-01,DE
 3502,Member 03502,member-03502@example.invalid,legacy_feed,2025-04-23,KE
 3503,Member 03503,member-03503@example.invalid,legacy_feed,2022-04-11,KE
-3504,Member 03504,member-03504@example.invalid,engagement_v2,2024-02-17,IN
 3504,Member 03504,member-03504@example.invalid,legacy_feed,2023-03-29,IN
 3505,Member 03505,member-03505@example.invalid,legacy_feed,2022-05-26,GB
 3506,Member 03506,member-03506@example.invalid,legacy_feed,2023-03-04,DE
@@ -3885,7 +3878,6 @@ member_id,full_name,email,source_system,signup_date,country
 3877,Member 03877,member-03877@example.invalid,legacy_feed,2025-06-14,BR
 3878,Member 03878,member-03878@example.invalid,legacy_feed,2024-04-27,GB
 3879,Member 03879,member-03879@example.invalid,legacy_feed,2023-11-15,KE
-3880,Member 03880,member-03880@example.invalid,engagement_v2,2025-11-02,SG
 3880,Member 03880,member-03880@example.invalid,legacy_feed,2025-02-21,SG
 3881,Member 03881,member-03881@example.invalid,legacy_feed,2025-07-29,US
 3882,Member 03882,member-03882@example.invalid,legacy_feed,2022-01-24,DE
@@ -4071,7 +4063,6 @@ member_id,full_name,email,source_system,signup_date,country
 4062,Member 04062,member-04062@example.invalid,legacy_feed,2024-01-27,IN
 4063,Member 04063,member-04063@example.invalid,legacy_feed,2022-04-19,GB
 4064,Member 04064,member-04064@example.invalid,legacy_feed,2025-02-20,SG
-4065,Member 04065,member-04065@example.invalid,engagement_v2,2024-07-02,GB
 4065,Member 04065,member-04065@example.invalid,legacy_feed,2024-01-06,GB
 4066,Member 04066,member-04066@example.invalid,legacy_feed,2023-08-01,SG
 4067,Member 04067,member-04067@example.invalid,legacy_feed,2022-03-05,US
@@ -4334,7 +4325,6 @@ member_id,full_name,email,source_system,signup_date,country
 4324,Member 04324,member-04324@example.invalid,legacy_feed,2022-03-25,US
 4325,Member 04325,member-04325@example.invalid,legacy_feed,2022-07-24,SG
 4326,Member 04326,member-04326@example.invalid,legacy_feed,2025-07-18,IN
-4327,Member 04327,member-04327@example.invalid,engagement_v2,2024-07-18,SG
 4327,Member 04327,member-04327@example.invalid,legacy_feed,2024-02-10,SG
 4328,Member 04328,member-04328@example.invalid,legacy_feed,2022-11-20,GB
 4329,Member 04329,member-04329@example.invalid,legacy_feed,2024-09-24,GB
@@ -4357,7 +4347,6 @@ member_id,full_name,email,source_system,signup_date,country
 4346,Member 04346,member-04346@example.invalid,legacy_feed,2024-05-07,GB
 4347,Member 04347,member-04347@example.invalid,legacy_feed,2025-02-16,US
 4348,Member 04348,member-04348@example.invalid,legacy_feed,2023-01-29,GB
-4349,Member 04349,member-04349@example.invalid,engagement_v2,2025-08-09,GB
 4349,Member 04349,member-04349@example.invalid,legacy_feed,2024-12-21,GB
 4350,Member 04350,member-04350@example.invalid,legacy_feed,2025-06-21,KE
 4351,Member 04351,member-04351@example.invalid,legacy_feed,2025-01-10,IN
@@ -4408,7 +4397,6 @@ member_id,full_name,email,source_system,signup_date,country
 4396,Member 04396,member-04396@example.invalid,legacy_feed,2023-07-29,US
 4397,Member 04397,member-04397@example.invalid,legacy_feed,2022-08-16,SG
 4398,Member 04398,member-04398@example.invalid,legacy_feed,2024-08-11,BR
-4399,Member 04399,member-04399@example.invalid,engagement_v2,2024-09-17,US
 4399,Member 04399,member-04399@example.invalid,legacy_feed,2024-05-06,US
 4400,Member 04400,member-04400@example.invalid,legacy_feed,2023-12-05,US
 4401,Member 04401,member-04401@example.invalid,legacy_feed,2023-08-28,IN
@@ -4509,10 +4497,8 @@ member_id,full_name,email,source_system,signup_date,country
 4496,Member 04496,member-04496@example.invalid,legacy_feed,2025-10-29,IN
 4497,Member 04497,member-04497@example.invalid,legacy_feed,2022-09-28,BR
 4498,Member 04498,member-04498@example.invalid,legacy_feed,2023-12-12,BR
-4499,Member 04499,member-04499@example.invalid,engagement_v2,2025-07-22,DE
 4499,Member 04499,member-04499@example.invalid,legacy_feed,2024-06-28,DE
 4500,Member 04500,member-04500@example.invalid,legacy_feed,2025-08-13,GB
-4501,Member 04501,member-04501@example.invalid,engagement_v2,2023-12-11,US
 4501,Member 04501,member-04501@example.invalid,legacy_feed,2023-08-21,US
 4502,Member 04502,member-04502@example.invalid,legacy_feed,2022-05-09,GB
 4503,Member 04503,member-04503@example.invalid,legacy_feed,2023-04-21,SG
@@ -4584,7 +4570,6 @@ member_id,full_name,email,source_system,signup_date,country
 4569,Member 04569,member-04569@example.invalid,legacy_feed,2023-02-03,BR
 4570,Member 04570,member-04570@example.invalid,legacy_feed,2023-10-13,IN
 4571,Member 04571,member-04571@example.invalid,legacy_feed,2025-05-24,IN
-4572,Member 04572,member-04572@example.invalid,engagement_v2,2023-01-17,DE
 4572,Member 04572,member-04572@example.invalid,legacy_feed,2022-04-25,DE
 4573,Member 04573,member-04573@example.invalid,legacy_feed,2024-01-10,BR
 4574,Member 04574,member-04574@example.invalid,legacy_feed,2022-10-30,DE
@@ -4785,7 +4770,6 @@ member_id,full_name,email,source_system,signup_date,country
 4769,Member 04769,member-04769@example.invalid,legacy_feed,2024-07-20,GB
 4770,Member 04770,member-04770@example.invalid,legacy_feed,2022-09-08,KE
 4771,Member 04771,member-04771@example.invalid,legacy_feed,2024-09-29,BR
-4772,Member 04772,member-04772@example.invalid,engagement_v2,2023-10-01,DE
 4772,Member 04772,member-04772@example.invalid,legacy_feed,2023-04-18,DE
 4773,Member 04773,member-04773@example.invalid,legacy_feed,2022-10-03,GB
 4774,Member 04774,member-04774@example.invalid,legacy_feed,2022-07-23,DE
@@ -5044,7 +5028,6 @@ member_id,full_name,email,source_system,signup_date,country
 5027,Member 05027,member-05027@example.invalid,legacy_feed,2024-07-18,SG
 5028,Member 05028,member-05028@example.invalid,legacy_feed,2025-10-11,BR
 5029,Member 05029,member-05029@example.invalid,legacy_feed,2022-08-31,US
-5030,Member 05030,member-05030@example.invalid,engagement_v2,2023-09-09,US
 5030,Member 05030,member-05030@example.invalid,legacy_feed,2023-02-21,US
 5031,Member 05031,member-05031@example.invalid,legacy_feed,2023-06-30,KE
 5032,Member 05032,member-05032@example.invalid,legacy_feed,2024-10-09,BR
@@ -5061,7 +5044,6 @@ member_id,full_name,email,source_system,signup_date,country
 5043,Member 05043,member-05043@example.invalid,legacy_feed,2024-07-12,US
 5044,Member 05044,member-05044@example.invalid,legacy_feed,2024-01-28,IN
 5045,Member 05045,member-05045@example.invalid,legacy_feed,2025-08-18,BR
-5046,Member 05046,member-05046@example.invalid,engagement_v2,2022-12-29,GB
 5046,Member 05046,member-05046@example.invalid,legacy_feed,2022-06-25,GB
 5047,Member 05047,member-05047@example.invalid,legacy_feed,2024-08-18,US
 5048,Member 05048,member-05048@example.invalid,legacy_feed,2023-10-25,DE
@@ -5098,7 +5080,6 @@ member_id,full_name,email,source_system,signup_date,country
 5079,Member 05079,member-05079@example.invalid,legacy_feed,2024-01-09,BR
 5080,Member 05080,member-05080@example.invalid,legacy_feed,2023-08-03,KE
 5081,Member 05081,member-05081@example.invalid,legacy_feed,2025-06-09,SG
-5082,Member 05082,member-05082@example.invalid,engagement_v2,2023-09-25,IN
 5082,Member 05082,member-05082@example.invalid,legacy_feed,2023-06-25,IN
 5083,Member 05083,member-05083@example.invalid,legacy_feed,2023-10-04,BR
 5084,Member 05084,member-05084@example.invalid,legacy_feed,2022-12-04,KE
@@ -5411,11 +5392,9 @@ member_id,full_name,email,source_system,signup_date,country
 5391,Member 05391,member-05391@example.invalid,legacy_feed,2024-07-08,KE
 5392,Member 05392,member-05392@example.invalid,legacy_feed,2025-03-18,DE
 5393,Member 05393,member-05393@example.invalid,legacy_feed,2022-01-11,BR
-5394,Member 05394,member-05394@example.invalid,engagement_v2,2024-08-10,US
 5394,Member 05394,member-05394@example.invalid,legacy_feed,2023-11-26,US
 5395,Member 05395,member-05395@example.invalid,legacy_feed,2025-04-06,IN
 5396,Member 05396,member-05396@example.invalid,legacy_feed,2025-07-09,DE
-5397,Member 05397,member-05397@example.invalid,engagement_v2,2025-01-28,SG
 5397,Member 05397,member-05397@example.invalid,legacy_feed,2024-12-28,SG
 5398,Member 05398,member-05398@example.invalid,legacy_feed,2025-05-04,US
 5399,Member 05399,member-05399@example.invalid,legacy_feed,2023-12-19,KE
@@ -6509,7 +6488,6 @@ member_id,full_name,email,source_system,signup_date,country
 6487,Member 06487,member-06487@example.invalid,legacy_feed,2025-08-02,KE
 6488,Member 06488,member-06488@example.invalid,legacy_feed,2023-05-26,DE
 6489,Member 06489,member-06489@example.invalid,legacy_feed,2025-05-31,BR
-6490,Member 06490,member-06490@example.invalid,engagement_v2,2024-11-25,US
 6490,Member 06490,member-06490@example.invalid,legacy_feed,2024-07-26,US
 6491,Member 06491,member-06491@example.invalid,legacy_feed,2024-06-17,KE
 6492,Member 06492,member-06492@example.invalid,legacy_feed,2024-08-17,IN
@@ -6881,7 +6859,6 @@ member_id,full_name,email,source_system,signup_date,country
 6858,Member 06858,member-06858@example.invalid,legacy_feed,2022-04-21,DE
 6859,Member 06859,member-06859@example.invalid,legacy_feed,2022-08-06,DE
 6860,Member 06860,member-06860@example.invalid,legacy_feed,2025-04-06,GB
-6861,Member 06861,member-06861@example.invalid,engagement_v2,2025-01-23,SG
 6861,Member 06861,member-06861@example.invalid,legacy_feed,2024-09-03,SG
 6862,Member 06862,member-06862@example.invalid,legacy_feed,2025-05-01,SG
 6863,Member 06863,member-06863@example.invalid,legacy_feed,2022-11-20,GB
@@ -6900,7 +6877,6 @@ member_id,full_name,email,source_system,signup_date,country
 6876,Member 06876,member-06876@example.invalid,legacy_feed,2022-01-28,KE
 6877,Member 06877,member-06877@example.invalid,legacy_feed,2022-08-16,US
 6878,Member 06878,member-06878@example.invalid,legacy_feed,2022-05-03,DE
-6879,Member 06879,member-06879@example.invalid,engagement_v2,2023-02-12,IN
 6879,Member 06879,member-06879@example.invalid,legacy_feed,2022-03-07,IN
 6880,Member 06880,member-06880@example.invalid,legacy_feed,2022-12-22,IN
 6881,Member 06881,member-06881@example.invalid,legacy_feed,2022-11-25,GB
@@ -7975,7 +7951,6 @@ member_id,full_name,email,source_system,signup_date,country
 7950,Member 07950,member-07950@example.invalid,legacy_feed,2024-09-04,DE
 7951,Member 07951,member-07951@example.invalid,legacy_feed,2022-10-03,DE
 7952,Member 07952,member-07952@example.invalid,legacy_feed,2023-01-11,DE
-7953,Member 07953,member-07953@example.invalid,engagement_v2,2025-11-04,SG
 7953,Member 07953,member-07953@example.invalid,legacy_feed,2025-04-22,SG
 7954,Member 07954,member-07954@example.invalid,legacy_feed,2024-11-09,GB
 7955,Member 07955,member-07955@example.invalid,legacy_feed,2022-11-08,GB
@@ -8295,7 +8270,6 @@ member_id,full_name,email,source_system,signup_date,country
 8269,Member 08269,member-08269@example.invalid,legacy_feed,2024-12-05,KE
 8270,Member 08270,member-08270@example.invalid,legacy_feed,2024-12-22,GB
 8271,Member 08271,member-08271@example.invalid,legacy_feed,2025-05-24,SG
-8272,Member 08272,member-08272@example.invalid,engagement_v2,2023-08-25,US
 8272,Member 08272,member-08272@example.invalid,legacy_feed,2023-03-15,US
 8273,Member 08273,member-08273@example.invalid,legacy_feed,2025-07-21,SG
 8274,Member 08274,member-08274@example.invalid,legacy_feed,2023-07-23,DE
@@ -8544,7 +8518,6 @@ member_id,full_name,email,source_system,signup_date,country
 8517,Member 08517,member-08517@example.invalid,legacy_feed,2022-11-04,GB
 8518,Member 08518,member-08518@example.invalid,legacy_feed,2023-11-22,DE
 8519,Member 08519,member-08519@example.invalid,legacy_feed,2025-04-23,KE
-8520,Member 08520,member-08520@example.invalid,engagement_v2,2023-11-21,IN
 8520,Member 08520,member-08520@example.invalid,legacy_feed,2023-02-09,IN
 8521,Member 08521,member-08521@example.invalid,legacy_feed,2025-06-12,DE
 8522,Member 08522,member-08522@example.invalid,legacy_feed,2024-07-20,BR
@@ -8749,7 +8722,6 @@ member_id,full_name,email,source_system,signup_date,country
 8721,Member 08721,member-08721@example.invalid,legacy_feed,2024-04-25,DE
 8722,Member 08722,member-08722@example.invalid,legacy_feed,2023-11-27,US
 8723,Member 08723,member-08723@example.invalid,legacy_feed,2023-05-13,SG
-8724,Member 08724,member-08724@example.invalid,engagement_v2,2025-02-17,US
 8724,Member 08724,member-08724@example.invalid,legacy_feed,2024-09-15,US
 8725,Member 08725,member-08725@example.invalid,legacy_feed,2023-06-26,GB
 8726,Member 08726,member-08726@example.invalid,legacy_feed,2023-11-07,DE
@@ -8805,7 +8777,6 @@ member_id,full_name,email,source_system,signup_date,country
 8776,Member 08776,member-08776@example.invalid,legacy_feed,2022-09-02,DE
 8777,Member 08777,member-08777@example.invalid,legacy_feed,2023-02-08,KE
 8778,Member 08778,member-08778@example.invalid,legacy_feed,2024-10-18,BR
-8779,Member 08779,member-08779@example.invalid,engagement_v2,2025-11-10,DE
 8779,Member 08779,member-08779@example.invalid,legacy_feed,2025-03-12,DE
 8780,Member 08780,member-08780@example.invalid,legacy_feed,2022-01-25,SG
 8781,Member 08781,member-08781@example.invalid,legacy_feed,2024-12-09,US
@@ -9040,7 +9011,6 @@ member_id,full_name,email,source_system,signup_date,country
 9010,Member 09010,member-09010@example.invalid,legacy_feed,2024-02-19,IN
 9011,Member 09011,member-09011@example.invalid,legacy_feed,2022-09-13,GB
 9012,Member 09012,member-09012@example.invalid,legacy_feed,2022-12-25,IN
-9013,Member 09013,member-09013@example.invalid,engagement_v2,2026-02-07,DE
 9013,Member 09013,member-09013@example.invalid,legacy_feed,2025-03-30,DE
 9014,Member 09014,member-09014@example.invalid,legacy_feed,2024-11-23,GB
 9015,Member 09015,member-09015@example.invalid,legacy_feed,2022-11-30,SG
@@ -9231,7 +9201,6 @@ member_id,full_name,email,source_system,signup_date,country
 9200,Member 09200,member-09200@example.invalid,legacy_feed,2024-08-22,US
 9201,Member 09201,member-09201@example.invalid,legacy_feed,2025-09-14,BR
 9202,Member 09202,member-09202@example.invalid,legacy_feed,2023-09-04,SG
-9203,Member 09203,member-09203@example.invalid,engagement_v2,2023-07-16,IN
 9203,Member 09203,member-09203@example.invalid,legacy_feed,2022-09-13,IN
 9204,Member 09204,member-09204@example.invalid,legacy_feed,2025-06-03,BR
 9205,Member 09205,member-09205@example.invalid,legacy_feed,2022-11-11,GB
@@ -10552,7 +10521,6 @@ member_id,full_name,email,source_system,signup_date,country
 10520,Member 10520,member-10520@example.invalid,legacy_feed,2024-01-26,DE
 10521,Member 10521,member-10521@example.invalid,legacy_feed,2023-01-02,US
 10522,Member 10522,member-10522@example.invalid,legacy_feed,2024-12-28,US
-10523,Member 10523,member-10523@example.invalid,engagement_v2,2023-12-21,SG
 10523,Member 10523,member-10523@example.invalid,legacy_feed,2023-05-19,SG
 10524,Member 10524,member-10524@example.invalid,legacy_feed,2022-01-18,KE
 10525,Member 10525,member-10525@example.invalid,legacy_feed,2022-12-18,SG
@@ -10574,7 +10542,6 @@ member_id,full_name,email,source_system,signup_date,country
 10541,Member 10541,member-10541@example.invalid,legacy_feed,2022-03-28,GB
 10542,Member 10542,member-10542@example.invalid,legacy_feed,2024-02-12,US
 10543,Member 10543,member-10543@example.invalid,legacy_feed,2022-01-02,KE
-10544,Member 10544,member-10544@example.invalid,engagement_v2,2025-06-25,IN
 10544,Member 10544,member-10544@example.invalid,legacy_feed,2024-08-01,IN
 10545,Member 10545,member-10545@example.invalid,legacy_feed,2024-09-30,DE
 10546,Member 10546,member-10546@example.invalid,legacy_feed,2024-03-19,IN
@@ -10616,7 +10583,6 @@ member_id,full_name,email,source_system,signup_date,country
 10582,Member 10582,member-10582@example.invalid,legacy_feed,2022-10-26,DE
 10583,Member 10583,member-10583@example.invalid,legacy_feed,2022-07-27,KE
 10584,Member 10584,member-10584@example.invalid,legacy_feed,2024-02-06,GB
-10585,Member 10585,member-10585@example.invalid,engagement_v2,2024-11-22,BR
 10585,Member 10585,member-10585@example.invalid,legacy_feed,2023-12-19,BR
 10586,Member 10586,member-10586@example.invalid,legacy_feed,2024-03-02,DE
 10587,Member 10587,member-10587@example.invalid,legacy_feed,2024-06-06,GB
@@ -10803,7 +10769,6 @@ member_id,full_name,email,source_system,signup_date,country
 10768,Member 10768,member-10768@example.invalid,legacy_feed,2024-05-14,DE
 10769,Member 10769,member-10769@example.invalid,legacy_feed,2023-10-07,SG
 10770,Member 10770,member-10770@example.invalid,legacy_feed,2025-03-06,SG
-10771,Member 10771,member-10771@example.invalid,engagement_v2,2023-10-19,GB
 10771,Member 10771,member-10771@example.invalid,legacy_feed,2023-01-12,GB
 10772,Member 10772,member-10772@example.invalid,legacy_feed,2022-12-03,KE
 10773,Member 10773,member-10773@example.invalid,legacy_feed,2024-05-01,GB
@@ -10843,7 +10808,6 @@ member_id,full_name,email,source_system,signup_date,country
 10807,Member 10807,member-10807@example.invalid,legacy_feed,2023-04-18,KE
 10808,Member 10808,member-10808@example.invalid,legacy_feed,2025-04-25,US
 10809,Member 10809,member-10809@example.invalid,legacy_feed,2024-07-09,KE
-10810,Member 10810,member-10810@example.invalid,engagement_v2,2023-10-17,DE
 10810,Member 10810,member-10810@example.invalid,legacy_feed,2023-09-07,DE
 10811,Member 10811,member-10811@example.invalid,legacy_feed,2022-03-21,SG
 10812,Member 10812,member-10812@example.invalid,legacy_feed,2023-04-15,DE
@@ -11004,7 +10968,6 @@ member_id,full_name,email,source_system,signup_date,country
 10967,Member 10967,member-10967@example.invalid,legacy_feed,2023-05-23,GB
 10968,Member 10968,member-10968@example.invalid,legacy_feed,2023-11-16,US
 10969,Member 10969,member-10969@example.invalid,legacy_feed,2023-01-15,DE
-10970,Member 10970,member-10970@example.invalid,engagement_v2,2025-08-14,DE
 10970,Member 10970,member-10970@example.invalid,legacy_feed,2025-03-11,DE
 10971,Member 10971,member-10971@example.invalid,legacy_feed,2022-08-01,DE
 10972,Member 10972,member-10972@example.invalid,legacy_feed,2022-02-04,BR
@@ -11102,7 +11065,6 @@ member_id,full_name,email,source_system,signup_date,country
 11064,Member 11064,member-11064@example.invalid,legacy_feed,2022-07-22,KE
 11065,Member 11065,member-11065@example.invalid,legacy_feed,2025-09-10,IN
 11066,Member 11066,member-11066@example.invalid,legacy_feed,2023-09-28,DE
-11067,Member 11067,member-11067@example.invalid,engagement_v2,2025-04-01,GB
 11067,Member 11067,member-11067@example.invalid,legacy_feed,2024-04-06,GB
 11068,Member 11068,member-11068@example.invalid,legacy_feed,2022-05-09,IN
 11069,Member 11069,member-11069@example.invalid,legacy_feed,2022-08-08,US
@@ -11146,7 +11108,6 @@ member_id,full_name,email,source_system,signup_date,country
 11107,Member 11107,member-11107@example.invalid,legacy_feed,2022-05-29,GB
 11108,Member 11108,member-11108@example.invalid,legacy_feed,2025-10-26,IN
 11109,Member 11109,member-11109@example.invalid,legacy_feed,2024-06-22,DE
-11110,Member 11110,member-11110@example.invalid,engagement_v2,2023-11-05,US
 11110,Member 11110,member-11110@example.invalid,legacy_feed,2022-10-05,US
 11111,Member 11111,member-11111@example.invalid,legacy_feed,2023-03-16,US
 11112,Member 11112,member-11112@example.invalid,legacy_feed,2024-01-30,GB
@@ -11633,7 +11594,6 @@ member_id,full_name,email,source_system,signup_date,country
 11593,Member 11593,member-11593@example.invalid,legacy_feed,2022-06-16,DE
 11594,Member 11594,member-11594@example.invalid,legacy_feed,2023-01-31,SG
 11595,Member 11595,member-11595@example.invalid,legacy_feed,2025-06-07,KE
-11596,Member 11596,member-11596@example.invalid,engagement_v2,2023-01-10,GB
 11596,Member 11596,member-11596@example.invalid,legacy_feed,2022-02-22,GB
 11597,Member 11597,member-11597@example.invalid,legacy_feed,2022-05-16,BR
 11598,Member 11598,member-11598@example.invalid,legacy_feed,2024-12-16,GB

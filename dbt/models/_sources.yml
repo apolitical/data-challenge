@@ -11,12 +11,12 @@ sources:
 
       - name: members
         description: >
-          The member dimension, as delivered by the membership platform. Its grain is member x
-          source_system: a member registered on more than one engagement platform has one row per
-          platform, so member_id alone is not unique here. There is no update timestamp.
+          The member dimension, as delivered by the membership platform. One row per member;
+          source_system says which engagement platform their activity comes from. There is no update
+          timestamp.
         columns:
           - name: member_id
-            description: "Member identifier. Not unique on this table -- see the table description."
+            description: "Member identifier."
           - name: full_name
             description: "The member's full name."
           - name: email

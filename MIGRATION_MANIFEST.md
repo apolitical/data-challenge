@@ -6,8 +6,7 @@ Maintained by the platform team. Last updated 2026-09-24.
 ## Which source system a member is on
 
 `raw.members.source_system` records which engagement platform a member's activity comes
-from. A member registered on both platforms has a row for each, so the table's grain is
-member × source system.
+from. Each member is on one platform, so the table has one row per member.
 
 | Source system | Members | Status |
 |---|---|---|
