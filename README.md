@@ -23,16 +23,16 @@ credentials — **nothing in the pipeline can reach a real service.**
 ## Layout
 
 ```
-SENIOR_DATA_ENGINEER.md   the exercise
-SETUP.md                  how to run everything
-MIGRATION_MANIFEST.md     status of the upstream engagement feed migration
-DUCKDB_REFERENCE.md       DuckDB syntax you may not have used before
-default.env               local environment; copy to .env and edit
-dbt/                      models, tests, dbt profile
-airflow/dags/             the sync-member-engagement pipeline and its CRM client
-airflow/utilities/        shared helpers: runtime, pipeline config, failure alerting
-mock_crm/                 the mock CRM, its API contract and its state
-mock_data/                committed fixtures
-scripts/                  warehouse loading, the pipeline run without Airflow, incident
-                          replay, reset, data exploration
+SENIOR_DATA_ENGINEER.md     the exercise
+SETUP.md                    how to run everything
+MIGRATION_MANIFEST.md       status of the upstream engagement feed migration
+DUCKDB_REFERENCE.md         DuckDB syntax you may not have used before
+default.env                 local environment; copy to .env and edit
+dbt-project/                models, tests, dbt profile
+airflow-project/dags/       the sync-member-engagement pipeline and its CRM client
+airflow-project/utilities/  shared helpers: runtime, pipeline config, failure alerting
+mock_crm/                   the mock CRM, its API contract and its state
+mock_data/                  committed fixtures
+scripts/                    warehouse loading, the pipeline run without Airflow, incident
+                            replay, reset, data exploration
 ```

@@ -21,11 +21,11 @@ dbt_project/
 notebooks/
 
 # dbt
-dbt/target
-dbt/.user.yml
-dbt/dbt_packages/
-dbt/package-lock.yml
-dbt/logs/
+dbt-project/target
+dbt-project/.user.yml
+dbt-project/dbt_packages/
+dbt-project/package-lock.yml
+dbt-project/logs/
 
 # DuckDB. The fixtures in mock_data/ are committed; the database built from them is not.
 *.duckdb

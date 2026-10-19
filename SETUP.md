@@ -18,7 +18,7 @@ Each step below assumes the ones above it.
 |---|---|---|---|
 | 1 | install dependencies | `uv sync` | seconds to a minute |
 | 2 | load the fixtures into DuckDB | `uv run python scripts/init_db.py` | ~7s |
-| 3 | build the models | `cd dbt && export DBT_PROFILES_DIR=$(pwd) && uv run dbt build` | ~5s |
+| 3 | build the models | `cd dbt-project && export DBT_PROFILES_DIR=$(pwd) && uv run dbt build` | ~5s |
 | 4 | run the pipeline | `cd .. && uv run python scripts/run_pipeline.py` | ~20s |
 
 That is everything needed to run the pipeline. Step 4 runs the DAG's three tasks without
@@ -55,11 +55,11 @@ That creates `mock_data.duckdb` and loads the fixtures from `mock_data/`. You sh
 four tables loaded: `raw.members`, `raw.events`, `raw.member_activity` and
 `raw.crm_member_state`.
 
-Then build the models. dbt commands run from `dbt/`; everything else in
+Then build the models. dbt commands run from `dbt-project/`; everything else in
 this file runs from the repository root, so come back afterwards:
 
 ```bash
-cd dbt
+cd dbt-project
 export DBT_PROFILES_DIR=$(pwd)
 uv run dbt build
 cd ..
@@ -124,7 +124,7 @@ uv run python scripts/run_pipeline.py --run-date 2026-09-25   # any run date
 It does what the DAG does, in the same order: `dbt run`, then `dbt test --select
 tag:critical`, then the sync, which reads the engagement mart and writes every member's
 tier to the CRM. A failed test stops it before the sync. It reads the same configuration
-as the DAG (`airflow/dags/sync_member_engagement/configs.yaml`).
+as the DAG (`airflow-project/dags/sync_member_engagement/configs.yaml`).
 
 It writes to the production mock CRM on port 8020, starting it if nothing is listening
 there and stopping it afterwards. Running it overwrites the CRM's current state, including
@@ -187,7 +187,7 @@ cp default.env .env
 ```
 
 Edit `.env` and set `AIRFLOW_HOME` and `PYTHONPATH` to the absolute path of this
-repository's `airflow` directory. Then:
+repository's `airflow-project` directory. Then:
 
 ```bash
 uv run --env-file .env airflow standalone
@@ -211,10 +211,10 @@ kill <PID>
 On macOS this repository includes a workaround for a known Airflow standalone crash in
 forked log-server processes:
 
-- `airflow/sitecustomize.py` — auto-loaded by Python at startup
-- `airflow/airflow_macos_standalone_workaround.py` — the patch itself
+- `airflow-project/sitecustomize.py` — auto-loaded by Python at startup
+- `airflow-project/airflow_macos_standalone_workaround.py` — the patch itself
 
-For the auto-load to work, `PYTHONPATH` must include `airflow/`.
+For the auto-load to work, `PYTHONPATH` must include `airflow-project/`.
 
 ## Looking at the data
 

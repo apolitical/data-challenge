@@ -29,8 +29,8 @@ import requests
 
 ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "airflow"))
-sys.path.insert(0, str(ROOT / "airflow" / "dags" / "sync_member_engagement"))
+sys.path.insert(0, str(ROOT / "airflow-project"))
+sys.path.insert(0, str(ROOT / "airflow-project" / "dags" / "sync_member_engagement"))
 
 import pipeline_config as C  # noqa: E402
 from crm_client import CrmClient, sync_engagement_tiers  # noqa: E402

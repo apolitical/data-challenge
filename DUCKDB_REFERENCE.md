@@ -81,10 +81,10 @@ date_trunc('week', event_timestamp)
 
 ## dbt
 
-Run dbt from `dbt/` with the profile directory set:
+Run dbt from `dbt-project/` with the profile directory set:
 
 ```bash
-cd dbt
+cd dbt-project
 export DBT_PROFILES_DIR=$(pwd)
 uv run dbt build
 ```

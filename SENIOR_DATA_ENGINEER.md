@@ -36,8 +36,8 @@ and the one that matters below is `dormant`.
 
 | Path | What it holds |
 |---|---|
-| `dbt/` | the dbt models that produce member engagement tiers |
-| `airflow/dags/` | the `sync-member-engagement` pipeline and its CRM client |
+| `dbt-project/` | the dbt models that produce member engagement tiers |
+| `airflow-project/dags/` | the `sync-member-engagement` pipeline and its CRM client |
 | `mock_crm/` | a local mock of the production CRM, and its API contract |
 | `mock_data/` | the committed fixtures, including one input snapshot per run date |
 | `scripts/` | warehouse loading, the pipeline run without Airflow (`run_pipeline.py`), incident replay, reset, and a query UI for the warehouse (`explore.py`) |
@@ -109,8 +109,8 @@ Technical facts about how things work are already in the repository. Where they 
 | What the CRM does, what triggers marketing automation, rate limits | `mock_crm/API.md` |
 | What each upstream feed populates | `MIGRATION_MANIFEST.md` |
 | How to run everything | `SETUP.md` |
-| What the source tables mean | `dbt/models/_sources.yml` |
-| What the engagement mart's columns mean | `dbt/models/marts/_marts_engagement.yml` |
+| What the source tables mean | `dbt-project/models/_sources.yml` |
+| What the engagement mart's columns mean | `dbt-project/models/marts/_marts_engagement.yml` |
 | DuckDB syntax you may not have used | `DUCKDB_REFERENCE.md` |
 
 ## What to send back

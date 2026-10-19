@@ -128,7 +128,7 @@ def main():
         load(conn)
     finally:
         conn.close()
-    print("\nDone. Next: cd dbt && export DBT_PROFILES_DIR=$(pwd) && uv run dbt build")
+    print("\nDone. Next: cd dbt-project && export DBT_PROFILES_DIR=$(pwd) && uv run dbt build")
     return 0
 
 
