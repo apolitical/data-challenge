@@ -58,7 +58,7 @@ before you run it, or reset afterwards.
 ## Replaying the incident, and resetting
 
 ```bash
-uv run python scripts/run_incident.py    # replay 2026-09-25 to 2026-09-28 (about 3 minutes)
+uv run python scripts/run_incident.py    # replay 2026-09-25 to 2026-09-28 (3 to 4 minutes)
 uv run python scripts/reset_state.py     # back to the state you received
 ```
 
