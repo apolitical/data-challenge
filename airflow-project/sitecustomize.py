@@ -1,7 +1,7 @@
 """Airflow startup hook for local repository-specific runtime fixes.
 
 The filename must stay exactly `sitecustomize.py` so Python auto-loads it
-during interpreter startup when `3-airflow/` is on `PYTHONPATH`.
+during interpreter startup when `airflow-project/` is on `PYTHONPATH`.
 """
 
 from airflow_macos_standalone_workaround import apply

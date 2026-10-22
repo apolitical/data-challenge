@@ -6,13 +6,13 @@ needs to be, so that the incident replay and the reset are runnable.
 """
 
 # The pipeline runs daily. These are the run dates the committed fixtures cover.
-PRE_INCIDENT_DATE = "2026-09-10"   # the last good run
-INCIDENT_DATE = "2026-09-11"       # the run whose tiers went wrong
-DISCOVERY_DATE = "2026-09-14"      # the day a member complained
-CURRENT_DATE = "2026-09-15"        # today: the run you would make yourself
+PRE_INCIDENT_DATE = "2026-09-24"   # the last good run
+INCIDENT_DATE = "2026-09-25"       # the run whose tiers went wrong
+DISCOVERY_DATE = "2026-09-28"      # the day a member complained
+CURRENT_DATE = "2026-09-29"        # today: the run you would make yourself
 
 RUN_DATES = [
-    "2026-09-10", "2026-09-11", "2026-09-12", "2026-09-13", "2026-09-14", "2026-09-15",
+    "2026-09-24", "2026-09-25", "2026-09-26", "2026-09-27", "2026-09-28", "2026-09-29",
 ]
 
 # The dates scripts/run_incident.py replays. Today is not replayed.

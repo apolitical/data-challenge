@@ -16,14 +16,16 @@ PLAN/
 # tree. Not part of this challenge and must never be committed to it.
 dbt_project/
 1-sql/
+2-dbt_project/
+3-airflow/
 notebooks/
 
 # dbt
-2-dbt_project/target
-2-dbt_project/.user.yml
-2-dbt_project/dbt_packages/
-2-dbt_project/package-lock.yml
-2-dbt_project/logs/
+dbt-project/target
+dbt-project/.user.yml
+dbt-project/dbt_packages/
+dbt-project/package-lock.yml
+dbt-project/logs/
 
 # DuckDB. The fixtures in mock_data/ are committed; the database built from them is not.
 *.duckdb

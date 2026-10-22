@@ -7,6 +7,11 @@ deliberate rather than tidiness. `recent_event_ids` must be stored as a genuine
 silently returns the *string* length instead of the list length, and every engagement
 score in the project is quietly wrong in a different way with no error raised anywhere.
 
+The database file is recreated from scratch each time, so it holds only what this
+challenge loads: a file left over from another branch of the repository would otherwise
+keep that branch's tables. That includes the models dbt builds, so build them again
+afterwards.
+
 Run: uv run python scripts/init_db.py
 """
 
@@ -116,12 +121,14 @@ def main():
     if not DATA_DIR.exists():
         print(f"❌ mock_data/ not found at {DATA_DIR}")
         return 1
+    for stale in (DB_FILE, DB_FILE.with_name(DB_FILE.name + ".wal")):
+        stale.unlink(missing_ok=True)
     conn = duckdb.connect(str(DB_FILE))
     try:
         load(conn)
     finally:
         conn.close()
-    print("\nDone. Next: cd 2-dbt_project && export DBT_PROFILES_DIR=$(pwd) && uv run dbt build")
+    print("\nDone. Next: cd dbt-project && export DBT_PROFILES_DIR=$(pwd) && uv run dbt build")
     return 0
 
 

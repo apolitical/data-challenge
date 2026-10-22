@@ -1,5 +1,5 @@
 -- base_membership__members.sql
--- Members as delivered by the membership platform, one row per member per source system
+-- Members as delivered by the membership platform, one row per member
 
     SELECT
         member_id,

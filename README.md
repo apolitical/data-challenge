@@ -6,33 +6,27 @@ it safe to run.
 **Start with [`SENIOR_DATA_ENGINEER.md`](SENIOR_DATA_ENGINEER.md).** Then
 [`SETUP.md`](SETUP.md) to get it running.
 
-## What this is
-
 | | |
 |---|---|
-| Warehouse | DuckDB, local file, no server |
+| Warehouse | DuckDB, a local file |
 | Transformation | dbt Core |
-| Orchestration | Airflow 2.11, local |
+| Orchestration | Airflow 2.11, optional: `scripts/run_pipeline.py` runs the same tasks without it |
 | CRM | a local mock with a documented API contract |
-| Python | 3.11 or 3.12 |
-| Package manager | `uv` |
+| Python | 3.11 or 3.12, with `uv` |
 
-No Docker, no cloud credentials. Both CRM environments are local mocks with dummy
-credentials — **nothing in the pipeline can reach a real service.**
-
-## Layout
+No Docker and no cloud credentials: **nothing in the pipeline can reach a real service.**
 
 ```
-SENIOR_DATA_ENGINEER.md   the exercise
-SETUP.md                  how to run everything
-MIGRATION_MANIFEST.md     status of the upstream engagement feed migration
-DUCKDB_REFERENCE.md       DuckDB syntax you may not have used before
-default.env               local environment; copy to .env and edit
-2-dbt_project/            models, tests, dbt profile
-3-airflow/dags/           the sync-member-engagement pipeline and its CRM client
-3-airflow/utilities/      shared helpers: runtime, pipeline config, failure alerting
-mock_crm/                 the mock CRM, its API contract and its state
-mock_data/                committed fixtures
-scripts/                  warehouse loading, incident replay, reset, standalone sync,
-                          data exploration
+SENIOR_DATA_ENGINEER.md     the exercise
+SETUP.md                    how to run everything
+MIGRATION_MANIFEST.md       status of the upstream engagement feed migration
+DUCKDB_REFERENCE.md         DuckDB syntax you may not have used before
+dbt-project/                models, tests, dbt profile
+airflow-project/dags/       the sync-member-engagement DAG and its CRM client
+airflow-project/utilities/  shared helpers: runtime, pipeline config, failure alerting
+mock_crm/                   the mock CRM, its API contract and its state
+mock_data/                  committed fixtures, one input snapshot per run date
+scripts/                    warehouse loading, the pipeline run without Airflow, incident
+                            replay, reset, data exploration
+default.env                 environment for running the DAG under Airflow
 ```

@@ -4,7 +4,7 @@
 
 common:
   # Paths are relative to the repository root, resolved in the DAG file.
-  dbt_project_dir: 2-dbt_project
+  dbt_project_dir: dbt-project
   warehouse_file: mock_data.duckdb
   engagement_model: marts_engagement__member_tiers
   # Data tests the pipeline gates on before anything reaches the CRM.
